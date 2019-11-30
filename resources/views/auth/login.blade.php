@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.metronic-4.app')
 
 @section('content')
 <div class="container">
@@ -51,7 +51,7 @@
 
                         <div class="form-group row mb-4">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Login') }}
                                 </button>
 
@@ -60,12 +60,6 @@
                                 </a>
                             </div>
                         </div>
-
-                        <p class="text-center mb-3">
-                            Or Login with
-                        </p>
-
-                        @include('partials.socials-icons')
 
                     </form>
                 </div>

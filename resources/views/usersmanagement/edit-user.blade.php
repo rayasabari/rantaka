@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.metronic-1.app')
 
-@section('template_title')
-    {!! trans('usersmanagement.editing-user', ['name' => $user->name]) !!}
+@section('head')
+    <title>Edit Users | Rantaka</title>
 @endsection
 
 @section('template_linked_css')
@@ -13,8 +13,13 @@
     </style>
 @endsection
 
-@section('content')
+@section('content_head')
+    <h3 class="kt-subheader__title"><a class="text-body" href="{{ url('/users') }}">User</a></h3>
+    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+    <span class="kt-subheader__desc">Edit</span>
+@endsection
 
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -37,7 +42,7 @@
                     <div class="card-body">
                         {!! Form::open(array('route' => ['users.update', $user->id], 'method' => 'PUT', 'role' => 'form', 'class' => 'needs-validation')) !!}
 
-                            {!! csrf_field() !!}
+                            @csrf
 
                             <div class="form-group has-feedback row {{ $errors->has('name') ? ' has-error ' : '' }}">
                                 {!! Form::label('name', trans('forms.create_user_label_username'), array('class' => 'col-md-3 control-label')); !!}
@@ -206,11 +211,11 @@
 
     @include('modals.modal-save')
     @include('modals.modal-delete')
-
 @endsection
 
 @section('footer_scripts')
-  @include('scripts.delete-modal-script')
-  @include('scripts.save-modal-script')
-  @include('scripts.check-changed')
+    <script src="{{ mix('/js/app.js') }}"></script>
+    @include('scripts.delete-modal-script')
+    @include('scripts.save-modal-script')
+    @include('scripts.check-changed')
 @endsection

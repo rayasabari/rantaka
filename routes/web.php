@@ -16,7 +16,10 @@
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     Route::get('/', 'WelcomeController@welcome')->name('welcome');
+    Route::post('/booking/{id_properti}', 'WelcomeController@booking_store');
+
 });
+
 
 // Authentication Routes
 Auth::routes();
@@ -126,6 +129,16 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');
     Route::get('active-users', 'AdminDetailsController@activeUsers');
+
+    Route::get('properti', 'AdminController@properti_index');
+    Route::get('properti/add', 'AdminController@properti_add');
+    Route::post('properti/add', 'AdminController@properti_store');
+    Route::get('properti/edit/{id}', 'AdminController@properti_edit');
+    Route::post('properti/edit/{id}', 'AdminController@properti_update');
+    Route::delete('properti/delete/{id}', 'AdminController@properti_destroy');
+
+    Route::get('booking', 'AdminController@booking_index');
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);

@@ -1,14 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.metronic-1.app')
 
 @section('template_title')
     {!! trans('usersmanagement.create-new-user') !!}
 @endsection
 
-@section('template_fastload_css')
+@section('content_head')
+    <h3 class="kt-subheader__title"><a class="text-body" href="{{ url('/users') }}">User</a></h3>
+    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+    <span class="kt-subheader__desc">Create</span>
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">

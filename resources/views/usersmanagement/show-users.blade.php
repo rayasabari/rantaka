@@ -1,7 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.metronic-1.app')
 
-@section('template_title')
-    {!! trans('usersmanagement.showing-all-users') !!}
+@section('head')
+    <title>Users | Rantaka</title>
+@endsection
+
+@section('content_head')
+    <h3 class="kt-subheader__title">User</h3>
+    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+    <span class="kt-subheader__desc">Index</span>
+    <a href="{{ url('/users/create') }}" class="btn btn-label-success btn-bold btn-sm btn-icon-h kt-margin-l-10">
+        Add New
+    </a>
 @endsection
 
 @section('template_linked_css')
@@ -151,6 +160,8 @@
 @endsection
 
 @section('footer_scripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+
     @if ((count($users) > config('usersmanagement.datatablesJsStartCount')) && config('usersmanagement.enabledDatatablesJs'))
         @include('scripts.datatables')
     @endif
