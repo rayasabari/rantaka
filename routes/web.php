@@ -138,6 +138,11 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::delete('properti/delete/{id}', 'AdminController@properti_destroy');
 
     Route::get('booking', 'AdminController@booking_index');
+    Route::get('booking/edit/{id}', 'AdminController@booking_edit');
+    Route::post('booking/edit/{id}', 'AdminController@booking_update');
+
+    Route::get('konfirmasi', 'AdminController@konfrimasi_index');
+    Route::get('project', 'AdminController@project_index');
 
 });
 

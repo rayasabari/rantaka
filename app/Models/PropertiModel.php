@@ -13,10 +13,19 @@ class PropertiModel extends Model
         return $this->hasOne('App\Models\ProjectModel','id','id_project');
     }
 
+    public function nama_tipe()
+    {
+        return $this->hasOne('App\Models\TipeRumahModel','id','tipe');
+    }
+
     public function status()
     {
         return $this->hasOne('App\Models\StatusPropertiModel','id','id_status');
     }
 
+    public function booking()
+    {
+        return $this->hasOne('App\Models\BookingModel','id','id_booking');
+    }
 
 }

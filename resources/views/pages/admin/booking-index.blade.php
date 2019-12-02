@@ -48,6 +48,7 @@
                                 <th class="text-left">Tgl. Booking</th>
                                 <th class="text-center">Expired</th>
                                 <th class="text-center">Status</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +75,18 @@
                                         @else  
                                             <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">{{ $b->status->text }}</span>
                                         @endif
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Update">
+                                            <i class="fa fa-user-edit"></i>
+                                        </a>
+                                        {{-- <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-icon btn-circle" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Delete">
+                                                <i class="text-danger flaticon2-rubbish-bin-delete-button"></i>
+                                            </button>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

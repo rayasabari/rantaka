@@ -8,6 +8,7 @@ use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
 use App\Models\ProjectModel;
 use App\Models\TipeRUmahModel;
+use App\Models\StatusBookingModel;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,8 @@ class AdminController extends Controller
             $project,
             $tipe_rumah,
             $status_properti,
-            $booking;
+            $booking,
+            $status_booking;
 
     public function __construct()
     {
@@ -24,6 +26,7 @@ class AdminController extends Controller
         $this->tipe_rumah       = New TipeRUmahModel;
         $this->status_properti  = New StatusPropertiModel;
         $this->booking          = New BookingModel;
+        $this->status_booking   = New StatusBookingModel;
     }
 
     public function properti_index(){
@@ -32,6 +35,12 @@ class AdminController extends Controller
         ->with(array(
             'status'    => function($query){
                 $query->select('id', 'text');
+            },
+            'nama_tipe' => function($query){
+                $query->select('id','text');
+            },
+            'booking'  => function($query){
+                $query->select('id','nama','no_hp','tgl_book','tgl_expired');
             }
         ))    
         ->orderBy('id', 'ASC')
@@ -160,5 +169,81 @@ class AdminController extends Controller
         ];
 
         return view('pages.admin.booking-index')->with($data);
+    }
+
+    public function booking_edit($id)
+    {
+        $booking    = $this->booking->where('id', $id)
+        ->with(array(
+            'properti'  => function($query){
+                $query->select('id','id_project','blok','no_unit','tipe', 'harga')
+                ->with(array(
+                    'project'   => function($query){
+                        $query->select('id','nama');
+                    },
+                    'nama_tipe' => function($query){
+                        $query->select('id','text');
+                    }
+                ));
+            },
+            'status'    => function($query){
+                $query->select('id','text');
+            }
+        ))
+        ->first();
+
+        $status_booking    = $this->status_booking->orderBy('id','ASC')->get();
+        
+        $data       = [
+            'booking'           => $booking,
+            'status_booking'    => $status_booking
+        ];
+
+        return view('pages.admin.booking-edit')->with($data);
+    }
+
+    public function booking_update(Request $request, $id)
+    {
+        $request->validate([
+            'id_status' => 'required'
+        ]);
+
+        $booking    = $this->booking->where('id', $id)->select('id','id_properti')->first();
+
+        $this->booking->where('id', $id)
+        ->update([
+            'id_status' => $request->id_status
+        ]);
+
+        if($request->id_status == 2){
+            $this->properti->where('id', $booking->id_properti)
+            ->update([
+                'id_status'     => 3,
+                'id_booking'    => $id
+            ]);
+        }elseif($request->id_status == 1){
+            $this->properti->where('id', $booking->id_properti)
+            ->update([
+                'id_status'     => 2,
+                'id_booking'    => $id
+            ]);
+        }else{
+            $this->properti->where('id', $booking->id_properti)
+            ->update([
+                'id_status'     => 1
+            ]);
+        }
+
+        return back()->with('status', "Booking berhasil diupdate!");
+    }
+
+    public function konfrimasi_index()
+    {
+        return view('pages.admin.konfirmasi-index');
+    }
+
+    public function project_index()
+    {
+        return view('pages.admin.project-index');
     }
 }
