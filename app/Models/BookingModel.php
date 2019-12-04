@@ -17,4 +17,9 @@ class BookingModel extends Model
     {
         return $this->hasOne('App\Models\StatusBookingModel','id','id_status');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User','id','id_user');
+    }
 }

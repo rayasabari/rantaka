@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Status</label>
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Status <span class="text-danger">*</span></label>
                                     <div class="col-lg-9 col-xl-6">
                                         <select class="form-control @error('id_status') is-invalid @enderror" name="id_status">
                                             <option value="">- Pilih -</option>

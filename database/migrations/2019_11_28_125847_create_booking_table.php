@@ -26,6 +26,7 @@ class CreateBookingTable extends Migration
             $table->dateTime('tgl_book');
             $table->dateTime('tgl_expired');
             $table->integer('id_status');
+            $table->integer('id_user');
             $table->timestamps();
         });
     }

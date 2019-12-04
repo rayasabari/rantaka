@@ -2,10 +2,36 @@
 
 @section('head')
     <title>Rantaka | Home</title>
+    <style>
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 600px) {
+            .p-logo {margin-top: -30px;margin-bottom: 15px;}
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            .p-logo {margin-top: -30px;margin-bottom: 15px;}
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            .p-logo {margin-top: -90px;margin-bottom: 50px;}
+        } 
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            .p-logo {margin-top: -90px;margin-bottom: 50px;}
+        } 
+
+        /* Extra large devices (large laptops and desktops, 1200px and up) */
+        @media only screen and (min-width: 1200px) {
+            .p-logo {margin-top: -90px;margin-bottom: 50px;}
+        }
+    </style>
 @endsection
 
 @section('subheader')
-    <h3 class="kt-subheader__title">
+    {{-- <h3 class="kt-subheader__title">
         Dashboard </h3>
     <div class="kt-subheader__breadcrumbs">
         <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
@@ -15,21 +41,22 @@
         <span class="kt-subheader__breadcrumbs-separator"></span>
         <a href="" class="kt-subheader__breadcrumbs-link">
             Default Dashboard </a>
-    </div>
+    </div> --}}
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col-lg-12 p-logo">
+        <img src="/images/gve_logo.png" alt="" width="650" class="mx-auto d-block img-fluid">
+    </div>
+</div>
+<div class="row">
     <div class="col-lg-12">
-        @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-        @endif
-        @if (session('gagal'))
-            <div class="alert alert-danger">
-                {{ session('gagal') }}
-            </div>
-        @endif
+        <img src="/images/gve_map.jpg" alt="" width="1320" class="img-fluid">
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
         <!--begin::Portlet-->
         <div class="kt-portlet kt-portlet--mobile">
             <div class="kt-portlet__head">
@@ -38,9 +65,27 @@
                         Stok Unit
                     </h3>
                 </div>
+                <div class="kt-portlet__head-toolbar">
+					<div class="kt-portlet__head-actions">
+                        <form method="post" action="{{ url('/refresh-stock') }}">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-brand btn-sm" data-dismiss="modal"><i class="la la-refresh mr-2"></i>Refresh</button>
+                        </form>
+					</div>
+				</div>
             </div>
             <div class="kt-portlet__body">
-                <table class="table table-hover">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
                             <th style="width: 3%">#</th>
@@ -52,16 +97,18 @@
                             <th class="text-center">Luas Bangunan</th>
                             <th class="text-center" colspan="2" style="width: 10%">Harga</th>
                             <th class="text-center">Status</th>
-                            <th class="text-center" style="width: 12%">Aksi</th>
+                            @if(Auth::user())
+                                <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($properti as $p)
+                        @foreach($properti as $key => $p)
                             <tr>
-                                <td>{{ ($properti ->currentPage()-1) * $properti ->perPage() + $loop->index + 1 }}</td>
+                                <td>{{ ($properti->currentPage() - 1) * $properti->perPage() + $loop->index + 1 }}</td>
                                 <td class="text-center align-middle">{{ $p->blok }}</td>
                                 <td class="text-center align-middle">{{ $p->no_unit }}</td>
-                                <td class="text-center align-middle">Tipe {{ $p->tipe }}</td>
+                                <td class="text-center align-middle">Tipe {{ $p->nama_tipe->text }}</td>
                                 <td class="text-center align-middle">{{ $p->jml_lantai }} lantai</td>
                                 <td class="text-center align-middle">{{ $p->luas_tanah }} m<sup>2</sup></td>
                                 <td class="text-center align-middle">{{ $p->luas_bangunan }} m<sup>2</sup></td>
@@ -71,12 +118,34 @@
                                     @if($p->id_status == 1)
                                         <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">{{ $p->status->text }}</span>
                                     @elseif($p->id_status == 2)
-                                        <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill">{{ $p->status->text }}</span>
+                                        <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill text-white">{{ $p->status->text }}</span>
                                     @else  
                                         <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill">{{ $p->status->text }}</span>
                                     @endif
                                 </td>
-                                <td class="text-right align-middle"><a href="#" class="btn btn-outline-success btn-sm btn-bold" data-toggle="modal" data-target="#modal_{{ $p->id }}"><i class="fa fa-tag mr-2 pt-2"></i>Book Now!</a></td>
+                                @if(Auth::user())
+                                    <td class="text-center align-middle">
+                                        @if($p->id_status == 1)
+                                            <a class="btn kt-font-brand btn-sm btn-icon d-inline" data-toggle="modal" data-target="#modal_{{ $p->id }}">
+                                                <i class="fa fa-tag mr-2"></i>Book Now!
+                                            </a>
+                                        {{-- @elseif($p->id_status == 2)
+                                            @if( strtotime($p->booking->tgl_expired) <= time())
+                                                <a class="btn kt-font-brand btn-sm btn-icon d-inline" data-toggle="modal" data-target="#modal_{{ $p->id }}">
+                                                    <i class="fa fa-tag mr-2"></i>Book Now!
+                                                </a>
+                                            @elseif( strtotime($p->booking->tgl_expired) >= time())
+                                                <a class="btn text-black-50 btn-sm btn-icon d-inline">
+                                                    <i class="fa fa-tag mr-2"></i>Book Now!
+                                                </a>
+                                            @endif --}}
+                                        @else 
+                                            <a class="btn text-black-50 btn-sm btn-icon d-inline">
+                                                <i class="fa fa-tag mr-2"></i>Book Now!
+                                            </a>
+                                        @endif
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
@@ -109,7 +178,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Alamat<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" @error('alamat') is-invalid @enderror name="alamat" rows="3" required>{{ old('alamat') }}</textarea>
+                                                <textarea class="form-control" @error('alamat') is-invalid @enderror name="alamat" rows="1" required>{{ old('alamat') }}</textarea>
                                                 @error('alamat')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -123,7 +192,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Email<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="" name="email" value="{{ old('email') }}" required>
+                                                <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="" name="email" value="{{ old('email') }}">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -168,4 +237,5 @@
         </div>
         <!--end::Portlet-->
     </div>
+</div>
 @endsection

@@ -23,8 +23,8 @@ class CreatePropertiTable extends Migration
             $table->integer('luas_tanah')->nullable();
             $table->integer('luas_bangunan')->nullable();
             $table->double('harga')->nullable();
-            $table->integer('is_status')->nullable();
-            $table->integer('id_booking');
+            $table->integer('id_status')->nullable();
+            $table->integer('id_booking')->nullable();
             $table->longText('keterangan')->nullable();
 
             $table->timestamps();

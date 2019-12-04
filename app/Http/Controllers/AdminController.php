@@ -9,6 +9,9 @@ use App\Models\BookingModel;
 use App\Models\ProjectModel;
 use App\Models\TipeRUmahModel;
 use App\Models\StatusBookingModel;
+use App\Models\KonfirmasiModel;
+use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -17,7 +20,8 @@ class AdminController extends Controller
             $tipe_rumah,
             $status_properti,
             $booking,
-            $status_booking;
+            $status_booking,
+            $konfirmasi;
 
     public function __construct()
     {
@@ -27,12 +31,17 @@ class AdminController extends Controller
         $this->status_properti  = New StatusPropertiModel;
         $this->booking          = New BookingModel;
         $this->status_booking   = New StatusBookingModel;
+        $this->konfirmasi       = New KonfirmasiModel;
+        $this->middleware('auth');
     }
 
     public function properti_index(){
 
-        $properti   =   $this->properti->where('id_project', 1)
+        $properti = $this->properti
         ->with(array(
+            'project'   => function($query){
+                $query->select('id', 'nama');
+            },
             'status'    => function($query){
                 $query->select('id', 'text');
             },
@@ -161,6 +170,9 @@ class AdminController extends Controller
             },
             'status'    => function($query){
                 $query->select('id','text');
+            },
+            'user'      => function($query){
+                $query->select('id','first_name','last_name');
             }
         ))
         ->orderBy('id','DESC')->paginate(10);
@@ -239,7 +251,63 @@ class AdminController extends Controller
 
     public function konfrimasi_index()
     {
-        return view('pages.admin.konfirmasi-index');
+        $konfirmasi     = $this->konfirmasi
+        ->with(array(
+            'booking'   => function($query){
+                $query->select('id','kode','id_properti')
+                ->with(array(
+                    'properti'  => function($query){
+                        $query->select('id','id_project','blok','no_unit')
+                        ->with(array(
+                            'project'   => function($query){
+                                $query->select('id','nama');
+                            }
+                        ));
+                    }
+                ));
+            }
+        ))
+        ->orderBy('id', 'DESC')->paginate(10);
+        
+        $data   = [
+            'konfirmasi'       => $konfirmasi
+        ];
+
+        return view('pages.admin.konfirmasi-index')->with($data);
+    }
+
+    public function konfirmasi_update(Request $request, $id)
+    {
+        $konfirmasi = $this->konfirmasi->where('id',$id)->select('id','id_booking')
+        ->with(array(
+            'booking'   => function($query){
+                $query->select('id','id_properti','kode','nama')
+                ->with(array(
+                    'properti'  => function($query){
+                        $query->select('id');
+                    }
+                ));
+            }
+        ))
+        ->first();
+
+        $this->konfirmasi->where('id',$id)
+        ->update([
+            'id_status' => 1
+        ]);
+
+        $this->booking->where('id',$konfirmasi->booking->id)
+        ->update([
+            'id_status' => 2
+        ]);
+
+        $this->properti->where('id',$konfirmasi->booking->properti->id)
+        ->update([
+            'id_status'     => 3,
+            'id_booking'    => $konfirmasi->booking->id
+        ]);
+        
+        return back()->with('success', 'ID Booking '.$konfirmasi->booking->kode.' telah disetujui!');
     }
 
     public function project_index()

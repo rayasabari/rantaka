@@ -35,26 +35,28 @@
                     </div>
                 </div>
                 <div class="kt-portlet__body">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
-                                <th style="width: 1%">#</th>
-                                <th class="text-center" style="width:10%">Unit</th>
+                                <th class="text-left" style="width: 1%">#</th>
+                                <th class="text-left" style="width: 12%">Project</th>
+                                <th class="text-center">Unit</th>
                                 <th class="text-center">Tipe</th>
                                 <th class="text-center">Jumlah Lantai</th>
                                 <th class="text-center">Luas Tanah</th>
                                 <th class="text-center">Luas Bangunan</th>
-                                <th class="text-center" colspan="2" style="width: 12%">Harga</th>
+                                <th class="text-center" colspan="2" style="width: 10%">Harga</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center" style="width: 5%">Aksi</th>
+                                <th class="text-center" style="width: 6%"><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($properti as $p)
                                 <tr>
-                                    <td>{{ ($properti ->currentPage()-1) * $properti ->perPage() + $loop->index + 1 }}</td>
+                                    <td class="text-left align-middle">{{ ($properti ->currentPage()-1) * $properti ->perPage() + $loop->index + 1 }}</td>
+                                    <td class="text-left align-middle">{{ $p->project->nama }}</td>
                                     <td class="text-center align-middle">{{ $p->blok .' - '. $p->no_unit }}</td>
-                                    <td class="text-center align-middle">Tipe {{ $p->tipe }}</td>
+                                    <td class="text-center align-middle">Tipe {{ $p->nama_tipe->text }}</td>
                                     <td class="text-center align-middle">{{ $p->jml_lantai }} lantai</td>
                                     <td class="text-center align-middle">{{ $p->luas_tanah }} m<sup>2</sup></td>
                                     <td class="text-center align-middle">{{ $p->luas_bangunan }} m<sup>2</sup></td>
@@ -70,7 +72,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
+                                        <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline mr-n2" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">

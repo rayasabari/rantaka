@@ -16,8 +16,10 @@
 // Homepage Route
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     Route::get('/', 'WelcomeController@welcome')->name('welcome');
-    Route::post('/booking/{id_properti}', 'WelcomeController@booking_store');
-
+    Route::get('/our-project', 'WelcomeController@our_project_index');
+    Route::get('/about-us', 'WelcomeController@about_us_index');
+    Route::get('/contact-us', 'WelcomeController@contact_us_index');
+    Route::post('/refresh-stock', 'WelcomeController@refresh_stock');
 });
 
 
@@ -98,6 +100,12 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
 
     // Route to upload user avatar.
     Route::post('avatar/upload', ['as' => 'avatar.upload', 'uses' => 'ProfilesController@upload']);
+
+    Route::post('booking/{id_properti}', 'UserController@booking_store');
+    Route::get('mybooking', 'UserController@booking_index');
+    Route::get('konfirmasi/form/{id_booking}', 'UserController@konfirmasi_form');
+    Route::post('konfirmasi/form/{id_booking}', 'UserController@konfirmasi_store');
+
 });
 
 // Registered, activated, and is admin routes.
@@ -140,8 +148,9 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('booking', 'AdminController@booking_index');
     Route::get('booking/edit/{id}', 'AdminController@booking_edit');
     Route::post('booking/edit/{id}', 'AdminController@booking_update');
-
+    
     Route::get('konfirmasi', 'AdminController@konfrimasi_index');
+    Route::post('konfirmasi/approve/{id}', 'AdminController@konfirmasi_update');
     Route::get('project', 'AdminController@project_index');
 
 });

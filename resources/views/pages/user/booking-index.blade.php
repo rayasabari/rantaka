@@ -1,50 +1,53 @@
-@extends('layouts.metronic-1.app')
+@extends('layouts.metronic-4.app')
 
 @section('head')
-    <title>Booking | Rantaka</title>
+    <title>My Booking | Rantaka</title>
 @endsection
 
-@section('content_head')
-    <h3 class="kt-subheader__title">Booking</h3>
-    <span class="kt-subheader__separator kt-subheader__separator--v"></span>
-    <span class="kt-subheader__desc">Index</span>
+@section('subheader')
+    <h3 class="kt-subheader__title">
+        My Booking </h3>
+    <div class="kt-subheader__breadcrumbs">
+        <a href="{{ url('/') }}" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+        <a href="{{ url('/mybooking') }}" class="kt-subheader__breadcrumbs-link">My Booking</a>
+        <span class="kt-subheader__breadcrumbs-separator"></span>
+        <a href="{{ url('/mybooking') }}" class="kt-subheader__breadcrumbs-link">List</a>
+    </div>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-lg-12">
-            @if (session('status'))
+            @if (session('success'))
                 <div class="alert alert-success">
-                    {{ session('status') }}
+                    {{ session('success') }}
                 </div>
             @endif
-            @if (session('gagal'))
+            @if (session('error'))
                 <div class="alert alert-danger">
-                    {{ session('gagal') }}
+                    {{ session('error') }}
                 </div>
             @endif
             <div class="kt-portlet kt-portlet--mobile">
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
                         <h3 class="kt-portlet__head-title">
-                            Daftar Booking
+                            Booking History
                         </h3>
                     </div>
                 </div>
                 <div class="kt-portlet__body">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th style="width: 1%">#</th>
-                                <th class="text-left" style="width: 10%">Kode</th>
-                                <th class="text-left" style="width:5%">Unit</th>
+                                <th class="text-left">Kode</th>
+                                <th class="text-left" style="width:4%">Unit</th>
                                 <th class="text-left">Nama</th>
                                 <th class="text-left">No. Handphone</th>
-                                <th class="text-center" colspan="2" style="width: 10%">Uang Muka</th>
+                                <th class="text-left" colspan="2">Uang Muka</th>
                                 <th class="text-center">Cicilan</th>
-                                <th class="text-left">Tgl. Booking</th>
                                 <th class="text-left">Expired</th>
-                                <th class="text-left">Marketing</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center"><i class="flaticon2-settings"></i></th>
                             </tr>
@@ -60,12 +63,10 @@
                                     <td class="text-left align-middle">Rp</td>
                                     <td class="text-right align-middle">{{ number_format( $b->properti->harga * ($b->dp / 100),0,',','.') }}</td>
                                     <td class="text-center align-middle">{{ $b->cicilan }}</td>
-                                    <td class="text-left align-middle">{{ date('d-m-Y H:i', strtotime($b->tgl_book)) }}</td>
                                     <td class="text-left align-middle">{{ date('d-m-Y H:i', strtotime($b->tgl_expired)) }}</td>
-                                    <td class="text-left align-middle">{{ $b->user->first_name .' '. $b->user->last_name }}</td>
                                     <td class="text-center align-middle">
                                         @if($b->id_status == 1)
-                                            <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill text-white">{{ $b->status->text }}</span>
+                                            <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill text-white"><a href="{{ url('/konfirmasi/form/'.$b->id) }}" class="text-white">{{ $b->status->text }}</a></span>
                                         @elseif($b->id_status == 2)
                                             <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">{{ $b->status->text }}</span>
                                         @else  
@@ -73,9 +74,15 @@
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
-                                            <i class="fa fa-edit mr-2"></i>Edit
-                                        </a>
+                                        @if($b->id_status == 1)
+                                            <a href="{{ url('/konfirmasi/form/'.$b->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Konfirmasi">
+                                                <i class="fa fa-paper-plane mr-2"></i>Konfirmasi
+                                            </a>
+                                        @else
+                                            <a class="btn text-black-50 btn-sm btn-icon d-inline">
+                                                <i class="fa fa-paper-plane mr-2"></i>Konfirmasi
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

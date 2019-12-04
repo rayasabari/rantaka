@@ -6,6 +6,7 @@ use App\Models\PropertiModel;
 use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
 use Illuminate\Http\Request;
+use Auth;
 
 class WelcomeController extends Controller
 {
@@ -28,13 +29,19 @@ class WelcomeController extends Controller
     {
         $page       =   'home';
         $properti   =   $this->properti->where('id_project', 1)
-                        ->with(array(
-                            'status'    => function($query){
-                                $query->select('id', 'text');
-                            }
-                        ))    
-                        ->orderBy('id', 'ASC')
-                        ->paginate(10);
+        ->with(array(
+            'status'    => function($query){
+                $query->select('id', 'text');
+            },
+            'nama_tipe' => function($query){
+                $query->select('id', 'text');
+            },
+            'booking'   => function($query){
+                $query->select('id','tgl_expired');
+            }
+        ))    
+        ->orderBy('id', 'ASC')
+        ->paginate(20);
 
         $data       =   [
             'page'          => $page,
@@ -44,36 +51,45 @@ class WelcomeController extends Controller
         return view('index')->with($data);
     }
 
-    public function booking_store(Request $request, $id_properti){
+    public function refresh_stock()
+    {
+        $booking = $this->booking->where('id_status', 1)
+        ->where('tgl_expired','<', date('Y-m-d H:i:s'))->select('id','id_properti','tgl_expired')->get();
 
-        $request->validate([
-            'nama'      => 'required|max:100',
-            'alamat'    => 'required',
-            'no_hp'     => 'required|max:18',
-            'email'     => 'required|max:100',
-            'dp'        => 'required',
-            'cicilan'   => 'required',
-        ]);
-
-        $booking                    = $this->booking;
-        $booking->id_properti       = $id_properti;
-        $booking->kode              = 'RHR'.date('ymdhis');
-        $booking->nama              = $request->nama;
-        $booking->alamat            = $request->alamat;
-        $booking->no_hp             = $request->no_hp;
-        $booking->email             = $request->email;
-        $booking->dp                = $request->dp;
-        $booking->cicilan           = $request->cicilan;
-        $booking->tgl_book          = date("Y-m-d H:i:s");
-        $booking->tgl_expired       = date("Y-m-d H:i:s", strtotime('+3 hours'));
-        $booking->id_status         = 1;
-        $booking->save();
-
-        $this->properti->where('id', $id_properti)
+        $this->booking->where('id_status', 1)
+        ->where('tgl_expired','<', date('Y-m-d H:i:s'))
         ->update([
-            'id_status' => 2
+            'id_status' => 3
         ]);
 
-        return back()->with("status","Booking berhasil disubmit, segera lakukan transfer dan konfirmasi!");
+        foreach($booking as $bk){
+            $this->properti->where('id',$bk->id_properti)
+            ->update([
+                'id_status' => 1,
+                'id_booking' => null
+            ]);
+        }
+
+        $count = $booking->count();
+
+        // return $booking; die;
+
+        return back()->with('success', $count. ' data updated!');
     }
+
+    public function our_project_index()
+    {
+        return view('pages.our-project');
+    }
+
+    public function about_us_index()
+    {
+        return view('pages.about-us');
+    }
+
+    public function contact_us_index()
+    {
+        return view('pages.contact-us');
+    }
+
 }
