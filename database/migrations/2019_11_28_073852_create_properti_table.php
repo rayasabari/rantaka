@@ -26,7 +26,7 @@ class CreatePropertiTable extends Migration
             $table->integer('id_status')->nullable();
             $table->integer('id_booking')->nullable();
             $table->longText('keterangan')->nullable();
-
+            $table->string('img_map',50)->nullable();
             $table->timestamps();
         });
     }

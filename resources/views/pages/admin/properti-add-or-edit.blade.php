@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="kt-form kt-form--label-right" method="post" action="{{ $act == 'add' ? url('/properti/add') : url('/properti/edit/'.$properti->id) }}">
+                <form class="kt-form kt-form--label-right" method="post" action="{{ $act == 'add' ? url('/properti/add') : url('/properti/edit/'.$properti->id) }}" enctype="multipart/form-data">
                     @csrf
                     <div class="kt-portlet__body">
                         <div class="kt-section kt-section--first">
@@ -144,6 +144,23 @@
                                         @error('status')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Map Lokasi Unit</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <div class="custom-file">
+                                            <input name="img_map" type="file" class="custom-file-input text-left @error('img_map') is-invalid @enderror" id="img_map">
+                                            <label class="custom-file-label" for="customFile">Pilih file</label>
+                                            @if($act == 'edit') 
+                                                <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
+                                                    <div class="kt-avatar__holder" style="background-image: url('storage/properti/{{ $properti->img_map }}');"></div>
+                                                </div>
+                                            @endif
+                                            @error('img_map')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
