@@ -22,4 +22,14 @@ class BookingModel extends Model
     {
         return $this->hasOne('App\Models\User','id','id_user');
     }
+
+    public function pendanaan()
+    {
+        return $this->hasOne('App\Models\PendanaanModel','id','id_pendanaan');
+    }
+
+    public function marketing()
+    {
+        return $this->hasOne('App\Models\MarketingModel','id','id_marketing');
+    }
 }

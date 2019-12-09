@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectTable extends Migration
+class CreatePendanaanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateProjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('project', function (Blueprint $table) {
+        Schema::create('pendanaan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama', 100);
-            $table->double('booking_fee')->nullable();
+            $table->string('nama')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateProjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project');
+        Schema::dropIfExists('pendanaan');
     }
 }

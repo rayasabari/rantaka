@@ -173,6 +173,12 @@ class AdminController extends Controller
             },
             'user'      => function($query){
                 $query->select('id','first_name','last_name');
+            },
+            'pendanaan' => function($query){
+                $query->select('id','nama');
+            },
+            'marketing' => function($query){
+                $query->select('id','nama');
             }
         ))
         ->orderBy('id','DESC')->paginate(10);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 04, 2019 at 12:31 PM
+-- Generation Time: Dec 09, 2019 at 10:43 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.10
 
@@ -61,9 +61,13 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `no_hp` varchar(18) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dp` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cicilan` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_ktp` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_pendanaan` int(1) DEFAULT NULL,
+  `dp` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cicilan` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_marketing` int(3) DEFAULT NULL,
+  `nama_referral` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_hp_referral` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tgl_book` datetime NOT NULL,
   `tgl_expired` datetime NOT NULL,
   `id_status` int(11) NOT NULL,
@@ -71,17 +75,18 @@ CREATE TABLE IF NOT EXISTS `booking` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `booking`
 --
 
-INSERT INTO `booking` (`id`, `id_properti`, `kode`, `nama`, `alamat`, `no_hp`, `email`, `dp`, `cicilan`, `tgl_book`, `tgl_expired`, `id_status`, `id_user`, `created_at`, `updated_at`) VALUES
-(1, 1, 'RHR191202081830', 'Raya Sabari', 'Jln. M. Kahfi II RT 004 RW 004\r\nCiganjur, Jagakarsa', '089630413336', 'rayavexed@gmail.com', '10', '10', '2019-12-02 20:18:30', '2019-12-02 23:18:30', 2, 5, '2019-12-02 13:18:30', '2019-12-03 08:21:52'),
-(2, 2, 'RHR191202082518', 'Raya Sabari', 'Jln. M. Kahfi II RT 004 RW 004\r\nCiganjur, Jagakarsa', '089630413336', 'rayavexed@gmail.com', '30', '25', '2019-12-02 20:25:18', '2019-12-02 23:25:18', 2, 5, '2019-12-02 13:25:18', '2019-12-03 12:55:48'),
-(3, 3, 'RHR191203033900', 'Abdul Latief', 'Jl. Karet Karya VII No. 9, Setiabudi, Jakarta Selatan 12920', '08123123123', 'abdul.latief@rhr.co.id', '10', '15', '2019-12-03 15:39:00', '2019-12-03 18:39:00', 3, 5, '2019-12-03 08:39:00', '2019-12-03 12:55:48'),
-(8, 3, 'RHR191204110824', 'Abdul Latief', 'Jl. Karet Karya VII No. 9, Jakarta', '081231233', 'abdul.latief@rhr.co.id', '20', '15', '2019-12-04 11:08:24', '2019-12-04 14:08:24', 1, 5, '2019-12-04 04:08:24', '2019-12-04 05:02:56');
+INSERT INTO `booking` (`id`, `id_properti`, `kode`, `nama`, `alamat`, `no_hp`, `no_ktp`, `id_pendanaan`, `dp`, `cicilan`, `id_marketing`, `nama_referral`, `no_hp_referral`, `tgl_book`, `tgl_expired`, `id_status`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, 1, 'RHR191202081830', 'Raya Sabari', 'Jln. M. Kahfi II RT 004 RW 004\r\nCiganjur, Jagakarsa', '089630413336', NULL, 3, '10', '10', 1, 'Lia', NULL, '2019-12-02 20:18:30', '2019-12-02 23:18:30', 2, 5, '2019-12-02 13:18:30', '2019-12-03 08:21:52'),
+(2, 2, 'RHR191202082518', 'Raya Sabari', 'Jln. M. Kahfi II RT 004 RW 004\r\nCiganjur, Jagakarsa', '089630413336', NULL, 3, '20', '5', 1, 'Lia', NULL, '2019-12-02 20:25:18', '2019-12-02 23:25:18', 2, 5, '2019-12-02 13:25:18', '2019-12-03 12:55:48'),
+(3, 3, 'RHR191203033900', 'Abdul Latief', 'Jl. Karet Karya VII No. 9, Setiabudi, Jakarta Selatan 12920', '08123123123', NULL, 3, '30', '20', 1, 'Eddy', NULL, '2019-12-03 15:39:00', '2019-12-03 18:39:00', 3, 5, '2019-12-03 08:39:00', '2019-12-03 12:55:48'),
+(8, 3, 'RHR191204110824', 'Abdul Latief', 'Jl. Karet Karya VII No. 9, Jakarta', '081231233', NULL, 2, '39', '10', 1, 'Agus', NULL, '2019-12-04 11:08:24', '2019-12-04 14:08:24', 3, 5, '2019-12-04 04:08:24', '2019-12-06 03:57:47'),
+(10, 3, 'RHR191206084800', 'Raya Sabari', 'Jln. M. Kahfi II RT 004 RW 004\r\nCiganjur, Jagakarsa', '089630413336', '0123123123123', 3, '20', '15', 2, 'Benny', 'asdf', '2019-12-06 20:48:00', '2019-12-06 23:48:00', 3, 5, '2019-12-06 13:48:00', '2019-12-09 03:26:54');
 
 -- --------------------------------------------------------
 
@@ -130,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `konfirmasi` (
 --
 
 INSERT INTO `konfirmasi` (`id`, `id_booking`, `bank_tujuan`, `bank_pengirim`, `no_rek_pengirim`, `nama_pengirim`, `tgl_transfer`, `jml_transfer`, `bukti_transfer`, `catatan`, `id_user`, `id_status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'BCA', 'BCA', '123123121231', 'Abdul', '2019-12-02', 20000000, '1575302742_gve_map.jpg', 'asdf', 5, 1, '2019-12-02 16:05:42', '2019-12-03 08:21:30'),
+(1, 2, 'BCA', 'BCA', '123123121231', 'Abdul', '2019-12-02', 20000000, '1575302742_gve_map.jpg', NULL, 5, 1, '2019-12-02 16:05:42', '2019-12-03 08:21:30'),
 (2, 1, 'BCA', 'BCA', '123123123', 'Prawito Nugroho', '2019-12-03', 27000000, '1575361200_GREEN_VALLEY_Page_3.jpg', NULL, 5, 1, '2019-12-03 08:20:00', '2019-12-03 08:21:52');
 
 -- --------------------------------------------------------
@@ -243,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `laravel_logger_activity` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1857 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2054 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `laravel_logger_activity`
@@ -2117,7 +2122,230 @@ INSERT INTO `laravel_logger_activity` (`id`, `description`, `userType`, `userId`
 (1853, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-04 05:08:05', '2019-12-04 05:08:05', NULL),
 (1854, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-04 05:08:06', '2019-12-04 05:08:06', NULL),
 (1855, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-04 05:10:30', '2019-12-04 05:10:30', NULL),
-(1856, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-04 05:10:38', '2019-12-04 05:10:38', NULL);
+(1856, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-04 05:10:38', '2019-12-04 05:10:38', NULL),
+(1857, 'Logged In', 'Registered', 1, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'POST', '2019-12-04 11:25:41', '2019-12-04 11:25:41', NULL),
+(1858, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'GET', '2019-12-04 11:25:41', '2019-12-04 11:25:41', NULL),
+(1859, 'Viewed properti/add', 'Registered', 1, 'http://rantaka.local/properti/add', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-04 11:25:46', '2019-12-04 11:25:46', NULL),
+(1860, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'GET', '2019-12-04 11:43:43', '2019-12-04 11:43:43', NULL),
+(1861, 'Logged In', 'Registered', 5, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/login', 'POST', '2019-12-06 03:05:56', '2019-12-06 03:05:56', NULL),
+(1862, 'Viewed home', 'Registered', 5, 'http://rantaka.local/home', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/login', 'GET', '2019-12-06 03:05:56', '2019-12-06 03:05:56', NULL),
+(1863, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 03:07:03', '2019-12-06 03:07:03', NULL),
+(1864, 'Logged In', 'Registered', 1, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'POST', '2019-12-06 03:08:36', '2019-12-06 03:08:36', NULL),
+(1865, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'GET', '2019-12-06 03:08:36', '2019-12-06 03:08:36', NULL),
+(1866, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'GET', '2019-12-06 04:28:59', '2019-12-06 04:28:59', NULL),
+(1867, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'GET', '2019-12-06 04:29:07', '2019-12-06 04:29:07', NULL),
+(1868, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'GET', '2019-12-06 04:29:23', '2019-12-06 04:29:23', NULL),
+(1869, 'Viewed booking/2', 'Registered', 5, 'http://rantaka.local/booking/2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 04:29:27', '2019-12-06 04:29:27', NULL),
+(1870, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:49:01', '2019-12-06 04:49:01', NULL),
+(1871, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:49:05', '2019-12-06 04:49:05', NULL),
+(1872, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:55:09', '2019-12-06 04:55:09', NULL),
+(1873, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:55:25', '2019-12-06 04:55:25', NULL),
+(1874, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:56:15', '2019-12-06 04:56:15', NULL),
+(1875, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:57:04', '2019-12-06 04:57:04', NULL),
+(1876, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 04:57:12', '2019-12-06 04:57:12', NULL),
+(1877, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:45:08', '2019-12-06 06:45:08', NULL),
+(1878, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:45:18', '2019-12-06 06:45:18', NULL),
+(1879, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:54:55', '2019-12-06 06:54:55', NULL),
+(1880, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:55:07', '2019-12-06 06:55:07', NULL),
+(1881, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:55:30', '2019-12-06 06:55:30', NULL),
+(1882, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:55:35', '2019-12-06 06:55:35', NULL),
+(1883, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:55:59', '2019-12-06 06:55:59', NULL),
+(1884, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:56:24', '2019-12-06 06:56:24', NULL),
+(1885, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 06:59:08', '2019-12-06 06:59:08', NULL),
+(1886, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:00:38', '2019-12-06 07:00:38', NULL),
+(1887, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:01:13', '2019-12-06 07:01:13', NULL),
+(1888, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:01:48', '2019-12-06 07:01:48', NULL),
+(1889, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:02:08', '2019-12-06 07:02:08', NULL),
+(1890, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:02:44', '2019-12-06 07:02:44', NULL),
+(1891, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:03:21', '2019-12-06 07:03:21', NULL),
+(1892, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:04:43', '2019-12-06 07:04:43', NULL),
+(1893, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:04:59', '2019-12-06 07:04:59', NULL),
+(1894, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:07:55', '2019-12-06 07:07:55', NULL),
+(1895, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:08:54', '2019-12-06 07:08:54', NULL),
+(1896, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:11:27', '2019-12-06 07:11:27', NULL),
+(1897, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:12:21', '2019-12-06 07:12:21', NULL),
+(1898, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:12:46', '2019-12-06 07:12:46', NULL),
+(1899, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:22:49', '2019-12-06 07:22:49', NULL),
+(1900, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:23:07', '2019-12-06 07:23:07', NULL),
+(1901, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:24:13', '2019-12-06 07:24:13', NULL),
+(1902, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:25:02', '2019-12-06 07:25:02', NULL),
+(1903, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:25:24', '2019-12-06 07:25:24', NULL),
+(1904, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:25:55', '2019-12-06 07:25:55', NULL),
+(1905, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:26:10', '2019-12-06 07:26:10', NULL),
+(1906, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:27:14', '2019-12-06 07:27:14', NULL),
+(1907, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:27:45', '2019-12-06 07:27:45', NULL),
+(1908, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 07:29:13', '2019-12-06 07:29:13', NULL),
+(1909, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 08:19:34', '2019-12-06 08:19:34', NULL),
+(1910, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 08:23:54', '2019-12-06 08:23:54', NULL),
+(1911, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 08:37:43', '2019-12-06 08:37:43', NULL),
+(1912, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 08:37:56', '2019-12-06 08:37:56', NULL),
+(1913, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:10:31', '2019-12-06 09:10:31', NULL),
+(1914, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:13:32', '2019-12-06 09:13:32', NULL),
+(1915, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:16:36', '2019-12-06 09:16:36', NULL),
+(1916, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:17:43', '2019-12-06 09:17:43', NULL),
+(1917, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:28:39', '2019-12-06 09:28:39', NULL),
+(1918, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:34:44', '2019-12-06 09:34:44', NULL),
+(1919, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 09:35:05', '2019-12-06 09:35:05', NULL),
+(1920, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:39:25', '2019-12-06 09:39:25', NULL),
+(1921, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:39:35', '2019-12-06 09:39:35', NULL),
+(1922, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:41:25', '2019-12-06 09:41:25', NULL),
+(1923, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:42:12', '2019-12-06 09:42:12', NULL),
+(1924, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:44:21', '2019-12-06 09:44:21', NULL),
+(1925, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:45:34', '2019-12-06 09:45:34', NULL),
+(1926, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:46:01', '2019-12-06 09:46:01', NULL),
+(1927, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:54:54', '2019-12-06 09:54:54', NULL);
+INSERT INTO `laravel_logger_activity` (`id`, `description`, `userType`, `userId`, `route`, `ipAddress`, `userAgent`, `locale`, `referer`, `methodType`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1928, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:55:18', '2019-12-06 09:55:18', NULL),
+(1929, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 09:57:58', '2019-12-06 09:57:58', NULL),
+(1930, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:00:34', '2019-12-06 10:00:34', NULL),
+(1931, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:00:54', '2019-12-06 10:00:54', NULL),
+(1932, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:01:15', '2019-12-06 10:01:15', NULL),
+(1933, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:01:45', '2019-12-06 10:01:45', NULL),
+(1934, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:02:05', '2019-12-06 10:02:05', NULL),
+(1935, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:02:17', '2019-12-06 10:02:17', NULL),
+(1936, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:02:25', '2019-12-06 10:02:25', NULL),
+(1937, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:02:52', '2019-12-06 10:02:52', NULL),
+(1938, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:03:32', '2019-12-06 10:03:32', NULL),
+(1939, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:04:33', '2019-12-06 10:04:33', NULL),
+(1940, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:07:38', '2019-12-06 10:07:38', NULL),
+(1941, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:08:38', '2019-12-06 10:08:38', NULL),
+(1942, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:08:53', '2019-12-06 10:08:53', NULL),
+(1943, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 10:10:06', '2019-12-06 10:10:06', NULL),
+(1944, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=1', 'POST', '2019-12-06 11:17:41', '2019-12-06 11:17:41', NULL),
+(1945, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:17:55', '2019-12-06 11:17:55', NULL),
+(1946, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:18:46', '2019-12-06 11:18:46', NULL),
+(1947, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:19:02', '2019-12-06 11:19:02', NULL),
+(1948, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:19:39', '2019-12-06 11:19:39', NULL),
+(1949, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:20:24', '2019-12-06 11:20:24', NULL),
+(1950, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:20:50', '2019-12-06 11:20:50', NULL),
+(1951, 'Created booking/4', 'Registered', 5, 'http://rantaka.local/booking/4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:21:12', '2019-12-06 11:21:12', NULL),
+(1952, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:21:23', '2019-12-06 11:21:23', NULL),
+(1953, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:24:04', '2019-12-06 11:24:04', NULL),
+(1954, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:25:07', '2019-12-06 11:25:07', NULL),
+(1955, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:26:26', '2019-12-06 11:26:26', NULL),
+(1956, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:26:37', '2019-12-06 11:26:37', NULL),
+(1957, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:27:57', '2019-12-06 11:27:57', NULL),
+(1958, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:28:11', '2019-12-06 11:28:11', NULL),
+(1959, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'POST', '2019-12-06 11:28:18', '2019-12-06 11:28:18', NULL),
+(1960, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:29:22', '2019-12-06 11:29:22', NULL),
+(1961, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 11:29:22', '2019-12-06 11:29:22', NULL),
+(1962, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:29:34', '2019-12-06 11:29:34', NULL),
+(1963, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:29:52', '2019-12-06 11:29:52', NULL),
+(1964, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/?page=index', 'POST', '2019-12-06 11:42:47', '2019-12-06 11:42:47', NULL),
+(1965, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:42:57', '2019-12-06 11:42:57', NULL),
+(1966, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 11:44:27', '2019-12-06 11:44:27', NULL),
+(1967, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:44:49', '2019-12-06 11:44:49', NULL),
+(1968, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 11:44:50', '2019-12-06 11:44:50', NULL),
+(1969, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 11:45:34', '2019-12-06 11:45:34', NULL),
+(1970, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 11:45:34', '2019-12-06 11:45:34', NULL),
+(1971, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 11:45:59', '2019-12-06 11:45:59', NULL),
+(1972, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 11:46:02', '2019-12-06 11:46:02', NULL),
+(1973, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:32:11', '2019-12-06 13:32:11', NULL),
+(1974, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', 'POST', '2019-12-06 13:32:28', '2019-12-06 13:32:28', NULL),
+(1975, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', 'GET', '2019-12-06 13:32:28', '2019-12-06 13:32:28', NULL),
+(1976, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:33:16', '2019-12-06 13:33:16', NULL),
+(1977, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:33:42', '2019-12-06 13:33:42', NULL),
+(1978, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:33:59', '2019-12-06 13:33:59', NULL),
+(1979, 'Viewed booking/w', 'Registered', 5, 'http://rantaka.local/booking/w', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 13:34:05', '2019-12-06 13:34:05', NULL),
+(1980, 'Viewed booking/2', 'Registered', 5, 'http://rantaka.local/booking/2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 13:34:09', '2019-12-06 13:34:09', NULL),
+(1981, 'Viewed booking/2', 'Registered', 5, 'http://rantaka.local/booking/2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 13:34:14', '2019-12-06 13:34:14', NULL),
+(1982, 'Viewed booking/1', 'Registered', 5, 'http://rantaka.local/booking/1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 13:34:17', '2019-12-06 13:34:17', NULL),
+(1983, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:34:23', '2019-12-06 13:34:23', NULL),
+(1984, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:34:30', '2019-12-06 13:34:30', NULL),
+(1985, 'Viewed booking/2', 'Registered', 5, 'http://rantaka.local/booking/2?_token=CMqhDYbZA8t0BWbXWeNuZr2WV8unsr0mMplsziWr', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', NULL, 'GET', '2019-12-06 13:34:38', '2019-12-06 13:34:38', NULL),
+(1986, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-06 13:34:51', '2019-12-06 13:34:51', NULL),
+(1987, 'Created booking/store/3', 'Registered', 5, 'http://rantaka.local/booking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:35:05', '2019-12-06 13:35:05', NULL),
+(1988, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:35:05', '2019-12-06 13:35:05', NULL),
+(1989, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:37:19', '2019-12-06 13:37:19', NULL),
+(1990, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:37:30', '2019-12-06 13:37:30', NULL),
+(1991, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:37:31', '2019-12-06 13:37:31', NULL),
+(1992, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:38:27', '2019-12-06 13:38:27', NULL),
+(1993, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:38:46', '2019-12-06 13:38:46', NULL),
+(1994, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:38:56', '2019-12-06 13:38:56', NULL),
+(1995, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:38:59', '2019-12-06 13:38:59', NULL),
+(1996, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:39:07', '2019-12-06 13:39:07', NULL),
+(1997, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:39:15', '2019-12-06 13:39:15', NULL),
+(1998, 'Logged In', 'Registered', 5, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'POST', '2019-12-06 13:39:51', '2019-12-06 13:39:51', NULL),
+(1999, 'Viewed home', 'Registered', 5, 'http://rantaka.local/home', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'GET', '2019-12-06 13:39:51', '2019-12-06 13:39:51', NULL),
+(2000, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:39:54', '2019-12-06 13:39:54', NULL),
+(2001, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:40:00', '2019-12-06 13:40:00', NULL),
+(2002, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3?', 'POST', '2019-12-06 13:40:22', '2019-12-06 13:40:22', NULL),
+(2003, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3?', 'POST', '2019-12-06 13:40:45', '2019-12-06 13:40:45', NULL),
+(2004, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3?', 'GET', '2019-12-06 13:40:46', '2019-12-06 13:40:46', NULL),
+(2005, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3?', 'POST', '2019-12-06 13:42:31', '2019-12-06 13:42:31', NULL),
+(2006, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:43:08', '2019-12-06 13:43:08', NULL),
+(2007, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:43:43', '2019-12-06 13:43:43', NULL),
+(2008, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:46:38', '2019-12-06 13:46:38', NULL),
+(2009, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:46:44', '2019-12-06 13:46:44', NULL),
+(2010, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:46:53', '2019-12-06 13:46:53', NULL),
+(2011, 'Viewed booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'GET', '2019-12-06 13:46:59', '2019-12-06 13:46:59', NULL),
+(2012, 'Created booking/3', 'Registered', 5, 'http://rantaka.local/booking/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/', 'POST', '2019-12-06 13:47:39', '2019-12-06 13:47:39', NULL),
+(2013, 'Created xbooking/store/3', 'Registered', 5, 'http://rantaka.local/xbooking/store/3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3', 'POST', '2019-12-06 13:47:59', '2019-12-06 13:47:59', NULL),
+(2014, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:48:00', '2019-12-06 13:48:00', NULL),
+(2015, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 13:50:10', '2019-12-06 13:50:10', NULL),
+(2016, 'Viewed konfirmasi/form/10', 'Registered', 5, 'http://rantaka.local/konfirmasi/form/10', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/mybooking', 'GET', '2019-12-06 13:52:18', '2019-12-06 13:52:18', NULL),
+(2017, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:06:42', '2019-12-06 14:06:42', NULL),
+(2018, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:07:16', '2019-12-06 14:07:16', NULL),
+(2019, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:08:04', '2019-12-06 14:08:04', NULL),
+(2020, 'Viewed konfirmasi/form/10', 'Registered', 5, 'http://rantaka.local/konfirmasi/form/10', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/mybooking', 'GET', '2019-12-06 14:09:46', '2019-12-06 14:09:46', NULL),
+(2021, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:09:48', '2019-12-06 14:09:48', NULL),
+(2022, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:09:59', '2019-12-06 14:09:59', NULL),
+(2023, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0', 'en-US,en;q=0.5', 'http://rantaka.local/booking/3', 'GET', '2019-12-06 14:25:35', '2019-12-06 14:25:35', NULL),
+(2024, 'Logged In', 'Registered', 1, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'POST', '2019-12-09 03:24:21', '2019-12-09 03:24:21', NULL),
+(2025, 'Viewed home', 'Registered', 1, 'http://rantaka.local/home', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/login', 'GET', '2019-12-09 03:24:21', '2019-12-09 03:24:21', NULL),
+(2026, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/home', 'GET', '2019-12-09 03:24:24', '2019-12-09 03:24:24', NULL),
+(2027, 'Logged In', 'Registered', 5, 'http://rantaka.local/login', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'en-US,en;q=0.5', 'http://rantaka.local/login', 'POST', '2019-12-09 03:24:46', '2019-12-09 03:24:46', NULL),
+(2028, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'en-US,en;q=0.5', 'http://rantaka.local/login', 'GET', '2019-12-09 03:24:46', '2019-12-09 03:24:46', NULL),
+(2029, 'Viewed konfirmasi/form/10', 'Registered', 5, 'http://rantaka.local/konfirmasi/form/10', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'en-US,en;q=0.5', 'http://rantaka.local/mybooking', 'GET', '2019-12-09 03:24:49', '2019-12-09 03:24:49', NULL),
+(2030, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:25:07', '2019-12-09 03:25:07', NULL),
+(2031, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:25:24', '2019-12-09 03:25:24', NULL),
+(2032, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-09 03:25:31', '2019-12-09 03:25:31', NULL),
+(2033, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:25:55', '2019-12-09 03:25:55', NULL),
+(2034, 'Viewed properti', 'Registered', 1, 'http://rantaka.local/properti', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:26:05', '2019-12-09 03:26:05', NULL),
+(2035, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/properti', 'GET', '2019-12-09 03:26:10', '2019-12-09 03:26:10', NULL),
+(2036, 'Viewed konfirmasi', 'Registered', 1, 'http://rantaka.local/konfirmasi', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:26:11', '2019-12-09 03:26:11', NULL),
+(2037, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/konfirmasi', 'GET', '2019-12-09 03:26:14', '2019-12-09 03:26:14', NULL),
+(2038, 'Viewed konfirmasi', 'Registered', 1, 'http://rantaka.local/konfirmasi', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:26:15', '2019-12-09 03:26:15', NULL),
+(2039, 'Viewed project', 'Registered', 1, 'http://rantaka.local/project', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/konfirmasi', 'GET', '2019-12-09 03:26:24', '2019-12-09 03:26:24', NULL),
+(2040, 'Viewed konfirmasi', 'Registered', 1, 'http://rantaka.local/konfirmasi', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/project', 'GET', '2019-12-09 03:26:26', '2019-12-09 03:26:26', NULL),
+(2041, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/konfirmasi', 'GET', '2019-12-09 03:26:35', '2019-12-09 03:26:35', NULL),
+(2042, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'en-US,en;q=0.5', 'http://rantaka.local/mybooking', 'GET', '2019-12-09 03:26:40', '2019-12-09 03:26:40', NULL),
+(2043, 'Viewed mybooking', 'Registered', 5, 'http://rantaka.local/mybooking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'en-US,en;q=0.5', 'http://rantaka.local/', 'GET', '2019-12-09 03:27:08', '2019-12-09 03:27:08', NULL),
+(2044, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:27:36', '2019-12-09 03:27:36', NULL),
+(2045, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:33:41', '2019-12-09 03:33:41', NULL),
+(2046, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:37:41', '2019-12-09 03:37:41', NULL),
+(2047, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:38:20', '2019-12-09 03:38:20', NULL),
+(2048, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:42:07', '2019-12-09 03:42:07', NULL),
+(2049, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:42:26', '2019-12-09 03:42:26', NULL),
+(2050, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:42:54', '2019-12-09 03:42:54', NULL),
+(2051, 'Viewed konfirmasi', 'Registered', 1, 'http://rantaka.local/konfirmasi', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/booking', 'GET', '2019-12-09 03:43:05', '2019-12-09 03:43:05', NULL),
+(2052, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/konfirmasi', 'GET', '2019-12-09 03:43:10', '2019-12-09 03:43:10', NULL),
+(2053, 'Viewed booking', 'Registered', 1, 'http://rantaka.local/booking', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36', 'en-GB,en;q=0.9,en-US;q=0.8,id;q=0.7', 'http://rantaka.local/konfirmasi', 'GET', '2019-12-09 03:43:28', '2019-12-09 03:43:28', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marketing`
+--
+
+DROP TABLE IF EXISTS `marketing`;
+CREATE TABLE IF NOT EXISTS `marketing` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_hp` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `marketing`
+--
+
+INSERT INTO `marketing` (`id`, `nama`, `no_hp`, `created_at`, `updated_at`) VALUES
+(1, 'Elfira Pranda', NULL, NULL, NULL),
+(2, 'Pamela Ribka', NULL, NULL, NULL),
+(3, 'Emilia Loman', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2131,7 +2359,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -2162,7 +2390,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2019_11_30_143850_create_project_table', 7),
 (23, '2019_11_30_150244_create_tipe_rumah_table', 8),
 (24, '2019_11_30_210106_create_status_booking_table', 9),
-(25, '2019_12_02_221204_create_konfirmasi_table', 10);
+(25, '2019_12_02_221204_create_konfirmasi_table', 10),
+(26, '2019_12_06_144404_create_marketing_table', 11),
+(27, '2019_12_06_150203_create_marketing_table', 12),
+(28, '2019_12_06_150353_create_pendanaan_table', 13);
 
 -- --------------------------------------------------------
 
@@ -2180,6 +2411,30 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`),
   KEY `password_resets_token_index` (`token`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pendanaan`
+--
+
+DROP TABLE IF EXISTS `pendanaan`;
+CREATE TABLE IF NOT EXISTS `pendanaan` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `pendanaan`
+--
+
+INSERT INTO `pendanaan` (`id`, `nama`, `created_at`, `updated_at`) VALUES
+(1, 'Cash Bertahap', NULL, NULL),
+(2, 'Cash', NULL, NULL),
+(3, 'KPR', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2304,6 +2559,7 @@ DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `booking_fee` double DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -2313,8 +2569,8 @@ CREATE TABLE IF NOT EXISTS `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'Green Valley Estate', NULL, NULL);
+INSERT INTO `project` (`id`, `nama`, `booking_fee`, `created_at`, `updated_at`) VALUES
+(1, 'Green Valley Estate', 5000000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2348,7 +2604,7 @@ CREATE TABLE IF NOT EXISTS `properti` (
 INSERT INTO `properti` (`id`, `id_project`, `blok`, `no_unit`, `tipe`, `jml_lantai`, `luas_tanah`, `luas_bangunan`, `harga`, `id_status`, `id_booking`, `keterangan`, `created_at`, `updated_at`) VALUES
 (1, 1, 'A', '1', '1', 1, 60, 30, 279000000, 3, 1, NULL, NULL, '2019-12-03 08:21:52'),
 (2, 1, 'A', '2', '1', 1, 60, 30, 279000000, 3, 2, NULL, NULL, '2019-12-03 12:55:48'),
-(3, 1, 'A', '3', '1', 1, 60, 30, 279000000, 2, NULL, NULL, NULL, '2019-12-04 05:02:56'),
+(3, 1, 'A', '3', '1', 1, 60, 30, 279000000, 1, NULL, NULL, NULL, '2019-12-09 03:26:54'),
 (4, 1, 'A', '4', '1', 1, 60, 30, 279000000, 1, NULL, NULL, NULL, '2019-12-03 16:14:38'),
 (5, 1, 'A', '5', '1', 1, 60, 30, 279000000, 1, NULL, NULL, NULL, '2019-12-04 03:37:31'),
 (6, 1, 'A', '6', '1', 1, 60, 30, 279000000, 1, NULL, NULL, NULL, NULL),

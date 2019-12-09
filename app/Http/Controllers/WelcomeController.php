@@ -41,11 +41,14 @@ class WelcomeController extends Controller
             }
         ))    
         ->orderBy('id', 'ASC')
-        ->paginate(20);
+        ->get();
+
+        $list_blok = $this->properti->distinct('blok')->select('blok')->orderBy('blok','ASC')->get();
 
         $data       =   [
             'page'          => $page,
-            'properti'      => $properti
+            'properti'      => $properti,
+            'list_blok'     => $list_blok
         ];
 
         return view('index')->with($data);

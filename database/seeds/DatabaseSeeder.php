@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectSeeder::class);
         $this->call(TipeRUmahSeeder::class);
         $this->call(StatusBookingSeeder::class);
+        $this->call(MarketingSeeder::class);
+        $this->call(PendanaanSeeder::class);
 
         Model::reguard();
     }

@@ -20,9 +20,13 @@ class CreateBookingTable extends Migration
             $table->string('nama', 100);
             $table->longText('alamat');
             $table->string('no_hp', 18);
-            $table->string('email', 100);
-            $table->string('dp', 4);
-            $table->string('cicilan', 2);
+            $table->string('no_ktp', 16);
+            $table->integer('id_pendanaan',1)->nullable();
+            $table->string('dp',20)->nullable();
+            $table->string('cicilan',20)->nullable();
+            $table->integer('id_marketing',3)->nullable();
+            $table->string('nama_referral', 100)->nullable();
+            $table->string('no_hp_referral',18)->nullable();
             $table->dateTime('tgl_book');
             $table->dateTime('tgl_expired');
             $table->integer('id_status');

@@ -101,7 +101,8 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
     // Route to upload user avatar.
     Route::post('avatar/upload', ['as' => 'avatar.upload', 'uses' => 'ProfilesController@upload']);
 
-    Route::post('booking/{id_properti}', 'UserController@booking_store');
+    Route::post('booking/{id_properti}', 'UserController@booking_add');
+    Route::post('xbooking/store/{id_properti}', 'UserController@booking_store');
     Route::get('mybooking', 'UserController@booking_index');
     Route::get('konfirmasi/form/{id_booking}', 'UserController@konfirmasi_form');
     Route::post('konfirmasi/form/{id_booking}', 'UserController@konfirmasi_store');

@@ -73,15 +73,15 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline mr-n2" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
-                                            <i class="fa fa-edit"></i>
+                                            <i class="fa fa-edit mr-2"></i>Edit
                                         </a>
-                                        <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">
+                                        {{-- <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">
                                             @method('delete')
                                             @csrf
                                             <button type="submit" class="btn btn-sm btn-icon btn-circle" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Delete">
                                                 <i class="text-danger flaticon2-rubbish-bin-delete-button"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach

@@ -45,9 +45,9 @@
                                 <th class="text-left" style="width:4%">Unit</th>
                                 <th class="text-left">Nama</th>
                                 <th class="text-left">No. Handphone</th>
-                                <th class="text-left" colspan="2">Uang Muka</th>
-                                <th class="text-center">Cicilan</th>
-                                <th class="text-left">Expired</th>
+                                <th class="text-left">Pendanaan</th>
+                                <th class="text-left">Marketing</th>
+                                <th class="text-left">Referral</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center"><i class="flaticon2-settings"></i></th>
                             </tr>
@@ -60,13 +60,14 @@
                                     <td class="text-left align-middle"><a data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="{{ $b->properti->project->nama }}">{{ $b->properti->blok .' - '. $b->properti->no_unit }}</a></td>
                                     <td class="text-le text-left align-middle">{{ $b->nama }}</td>
                                     <td class="text-left align-middle">{{ $b->no_hp }}</td>
-                                    <td class="text-left align-middle">Rp</td>
-                                    <td class="text-right align-middle">{{ number_format( $b->properti->harga * ($b->dp / 100),0,',','.') }}</td>
-                                    <td class="text-center align-middle">{{ $b->cicilan }}</td>
-                                    <td class="text-left align-middle">{{ date('d-m-Y H:i', strtotime($b->tgl_expired)) }}</td>
+                                    <td class="text-left align-middle">{{ $b->pendanaan->nama }}</td>
+                                    <td class="text-left align-middle">{{ $b->marketing->nama }}</td>
+                                    <td class="text-left align-middle">{{ $b->nama_referral }}</td>
                                     <td class="text-center align-middle">
                                         @if($b->id_status == 1)
-                                            <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill text-white"><a href="{{ url('/konfirmasi/form/'.$b->id) }}" class="text-white">{{ $b->status->text }}</a></span>
+                                            <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill text-white" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="{{ date('d M Y H:i', strtotime($b->tgl_expired)) }}">
+                                                <a href="{{ url('/konfirmasi/form/'.$b->id) }}" class="text-white">{{ $b->status->text }}</a>
+                                            </span>
                                         @elseif($b->id_status == 2)
                                             <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill">{{ $b->status->text }}</span>
                                         @else  
