@@ -72,8 +72,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline mr-n2" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
-                                            <i class="fa fa-edit mr-2"></i>Edit
+                                        <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit mr-1"></i>Edit
                                         </a>
                                         {{-- <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">
                                             @method('delete')

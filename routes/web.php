@@ -152,7 +152,18 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     
     Route::get('konfirmasi', 'AdminController@konfrimasi_index');
     Route::post('konfirmasi/approve/{id}', 'AdminController@konfirmasi_update');
+
     Route::get('project', 'AdminController@project_index');
+    Route::get('project/add', 'AdminController@project_add');
+    Route::post('project/add', 'AdminController@project_store');
+    Route::get('project/edit/{id}', 'AdminController@project_edit');
+    Route::post('project/edit/{id}', 'AdminController@project_update');
+
+    Route::get('marketing', 'AdminController@marketing_index');
+    Route::get('marketing/add', 'AdminController@marketing_add');
+    Route::post('marketing/add', 'AdminController@marketing_store');
+    Route::get('marketing/edit/{id}', 'AdminController@marketing_edit');
+    Route::post('marketing/edit/{id}', 'AdminController@marketing_update');
 
 });
 

@@ -46,7 +46,7 @@
                                 <th class="text-left">Marketing</th>
                                 <th class="text-left">Referral</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center"><i class="flaticon2-settings"></i></th>
+                                <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,8 +72,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn kt-font-brand btn-sm btn-icon d-inline" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Edit">
-                                            <i class="fa fa-edit mr-2"></i>Edit
+                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit mr-1"></i>Edit
                                         </a>
                                     </td>
                                 </tr>

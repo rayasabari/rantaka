@@ -46,7 +46,7 @@
                                 <th class="text-center">Bukti Transfer</th>
                                 <th class="text-left">Catatan</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center" style="width: 6%"><i class="flaticon2-settings"></i></th>
+                                <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,13 +76,13 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         @if($k->id_status == 1)
-                                            <a class="btn text-black-50 btn-sm btn-icon d-inline">
+                                            <button class="btn btn-primary btn-sm" disabled>
                                                 <i class="fa fa-check-double mr-2"></i>Approve
-                                            </a>
+                                            </button>
                                         @else
                                             <form method="post" action="{{ url('/konfirmasi/approve/'.$k->id) }}" class="d-inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-icon btn-circle kt-font-brand" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Approve?">
+                                                <button type="submit" class="btn btn-primary btn-sm" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Approve?">
                                                     <i class="fa fa-check-double mr-2"></i>Approve
                                                 </button>
                                             </form>

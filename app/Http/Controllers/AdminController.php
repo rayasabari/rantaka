@@ -360,6 +360,138 @@ class AdminController extends Controller
 
     public function project_index()
     {
-        return view('pages.admin.project-index');
+        $project    = $this->project->withCount('total','available','waiting','booked','deal')->orderBy('id','ASC')->paginate(10);
+        $data   = [
+            'project'   => $project,
+        ];
+        return view('pages.admin.project-index')->with($data);
+    }
+
+    public function project_add()
+    {
+        return view('pages.admin.project-add-or-edit');
+    }
+
+    public function project_store(Request $request)
+    {
+        $request->validate([
+            'nama'          => 'required',
+            'lokasi'        => 'required',
+            'total_luas'    => 'required',
+            'thn_bangun'    => 'required|max:4',
+            'img_map'       => 'image|max:2048'
+        ]);
+
+        $project                = $this->project;
+        $project->nama          = $request->nama;
+        $project->lokasi        = $request->lokasi;
+        $project->total_luas    = $request->total_luas;
+        $project->thn_bangun    = $request->thn_bangun;
+        if($request->hasFile('img_map')){
+            $filename = time().'_'.str_replace(' ','_', $request->nama ) .'_'. $request->total_luas .'.'. request()->img_map->getClientOriginalExtension();
+            $request->img_map->storeAs('project', $filename);
+            $project->img_map       = $filename;
+        }
+        $project->save();
+
+        return redirect('/project')->with('success','Project berhasil ditambhan');
+    }
+
+    public function project_edit($id)
+    {
+        $project    = $this->project->where('id',$id)->first();
+        $data       = [
+            'project'       => $project,
+        ];
+
+        return view('pages.admin.project-add-or-edit')->with($data);
+    }
+
+    public function project_update(Request $request, $id)
+    {
+        $project    = $this->project->where('id',$id)->first();
+
+        $request->validate([
+            'nama'          => 'required',
+            'lokasi'        => 'required',
+            'total_luas'    => 'required',
+            'thn_bangun'    => 'required|max:4',
+            'img_map'       => 'image|max:2048'
+        ]);
+
+        if($request->hasFile('img_map')){
+            Storage::delete('project/'.$project->img_map);
+            $filename = time() .'_'. str_replace(' ','_', $project->nama ) .'_'. $request->total_luas .'.'. request()->img_map->getClientOriginalExtension();
+            $request->img_map->storeAs('project', $filename);
+            $this->project->where('id',$id)
+            ->update([
+                'img_map'       => $filename,
+            ]);
+        }
+
+        $this->project->where('id',$id)->update([
+            'nama'          => $request->nama,
+            'lokasi'        => $request->lokasi,
+            'total_luas'    => $request->total_luas,
+            'thn_bangun'    => $request->thn_bangun
+        ]);
+
+        return back()->with('success','Data project berhasil dirubah!');
+    }
+
+    public function marketing_index()
+    {
+        $marketing  = $this->marketing->orderBy('nama','ASC')->withCount('total_booking','total_booked')->paginate(10);
+
+        $data       = [
+            'marketing'     => $marketing
+        ];
+
+        return view('pages.admin.marketing-index')->with($data);
+    }
+
+    public function marketing_add()
+    {
+        return view('pages.admin.marketing-add-or-edit');
+    }
+
+    public function marketing_store(Request $request)
+    {
+        $request->validate([
+            'nama'      => 'required|max:50',
+            'email'     => 'required|max:50|email'
+        ]);
+
+        $marketing          = $this->marketing;
+        $marketing->nama    = $request->nama;
+        $marketing->email   = $request->email;
+        $marketing->save();
+
+        return redirect('/marketing')->with('success','Marketing berhasil ditambah!');
+    }
+
+    public function marketing_edit($id)
+    {
+        $marketing      = $this->marketing->where('id',$id)->first();
+        $data           = [
+            'marketing'     => $marketing
+        ];
+
+        return view('pages.admin.marketing-add-or-edit')->with($data);
+    }
+
+    public function marketing_update(Request $request, $id)
+    {
+        $request->validate([
+            'nama'      => 'required|max:50',
+            'email'     => 'required|max:50|email'
+        ]);
+
+        $this->marketing->where('id',$id)->update([
+            'nama'      => $request->nama,
+            'email'     => $request->email
+        ]);
+
+        return back()->with('success','Data Marketing berhasil dirubah!');
     }
 }

@@ -16,7 +16,7 @@ class CreateMarketingTable extends Migration
         Schema::create('marketing', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama', 50)->nullable();
-            $table->string('no_hp', 18)->nullable();
+            $table->string('email', 50)->nullable();
             $table->timestamps();
         });
     }
