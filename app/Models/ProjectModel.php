@@ -33,4 +33,9 @@ class ProjectModel extends Model
         return $this->hasMany('App\Models\PropertiModel','id_project','id')->where('id_status', 4);
     }
 
+    public function harga_terendah()
+    {
+        return $this->hasMany('App\Models\PropertiModel','id_project','id');
+    }
+
 }

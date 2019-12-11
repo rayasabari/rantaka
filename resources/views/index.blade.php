@@ -52,8 +52,58 @@
 </div>
 <div class="row">
     <div class="col-lg-12" style="margin-top:33px">
-        <img src="/images/gve_map.jpg" alt="" width="1320" class="img-fluid">
+        <div class="kt-portlet kt-portlet--tabs">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-toolbar">
+                    <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-line-2x" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_1_1_tab_content" role="tab" aria-selected="false">
+                                <i class="la la-cog"></i> Info Umum
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_2_tab_content" role="tab" aria-selected="false">
+                                <i class="la la-briefcase"></i> Desain
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="true">
+                                <i class="la la-bell-o"></i>Spesifikasi
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="true">
+                                <i class="la la-bell-o"></i>Lokasi
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="true">
+                                <i class="la la-bell-o"></i>Perkiraan Angsuran
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="kt_portlet_base_demo_1_1_tab_content" role="tabpanel">
+                        <div class="kt-section">
+                            <div class="kt-section_desc">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                    <div class="tab-pane" id="kt_portlet_base_demo_1_3_tab_content" role="tabpanel">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+                    </div>
+                </div>      
+            </div>
+        </div>
     </div>
+    {{-- <img src="/images/gve_map.jpg" alt="" width="1320" class="img-fluid"> --}}
 </div>
 <div class="row">
     <div class="col-lg-12">

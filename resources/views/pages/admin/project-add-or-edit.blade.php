@@ -51,6 +51,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Deskripsi</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <textarea class="form-control" name="deskripsi">{{ $act == 'edit' ? old('deskripsi', $project->deskripsi) : old('deskripsi') }}</textarea>
+                                        @error('deskripsi')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Lokasi</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <textarea class="form-control" name="lokasi">{{ $act == 'edit' ? old('lokasi', $project->lokasi) : old('lokasi') }}</textarea>
@@ -60,10 +69,28 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Latitude</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control @error('latitude') is-invalid @enderror" name="latitude" type="text" value="{{ $act == 'edit' ? old('latitude', $project->latitude) : old('latitude') }}">
+                                        @error('latitude')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Longitude</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <input class="form-control @error('longitude') is-invalid @enderror" name="longitude" type="text" value="{{ $act == 'edit' ? old('longitude', $project->longitude) : old('longitude') }}">
+                                        @error('longitude')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Total Luas</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <div class="input-group">
-                                            <input type="number" step=".01" name="total_luas" class="form-control" value="{{ $act == 'edit' ? old('total_luas', number_format($project->total_luas),0,',','.') : old('total_luas') }}" placeholder="" aria-describedby="basic-addon1">
+                                            <input type="number" step=".01" name="total_luas" class="form-control" value="{{ $act == 'edit' ? old('total_luas', number_format($project->total_luas,2,'.',',') ) : old('total_luas') }}" placeholder="" aria-describedby="basic-addon1">
                                             <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
                                         </div>
                                         @error('total_luas')

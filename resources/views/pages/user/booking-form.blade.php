@@ -52,7 +52,6 @@
                                     <div class="form-group">
                                         <span class="text-black-50 d-block mb-1">Harga</span>
                                         <span><h6 class="kt-font-brand">Rp {{ number_format($properti->harga,0,',','.') }}</h6></span>
-                                        <hr>
                                     </div>
                                 </div>
                                 <div class="col-lg-6s">
@@ -74,7 +73,6 @@
                                     <div class="form-group">
                                         <span class="text-black-50 d-block mb-1">Booking Fee</span>
                                         <span><h6 class="text-success">Rp {{ number_format($properti->project->booking_fee,0,',','.') }}</h6></span>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>

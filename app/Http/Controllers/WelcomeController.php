@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\PropertiModel;
 use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
+use App\Models\ProjectModel;
+use App\Models\PendanaanModel;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -12,13 +14,17 @@ class WelcomeController extends Controller
 {
     public  $properti,
             $status_properti,
-            $booking;
+            $booking,
+            $project,
+            $pendanaan;
 
     public function __construct()
     {
         $this->properti         = New PropertiModel;
         $this->status_properti  = New StatusPropertiModel;
         $this->booking          = New BookingModel;
+        $this->project          = New ProjectModel;
+        $this->pendanaan        = New PendanaanModel;
     }
     /**
      * Show the application dashboard.
@@ -82,7 +88,57 @@ class WelcomeController extends Controller
 
     public function our_project_index()
     {
-        return view('pages.our-project');
+        $project    = $this->project
+        ->select('id','nama','deskripsi','lokasi','total_luas','thn_bangun','img_design','img_logo')
+        ->withCount('total','available','booked')
+        ->with(array(
+            'harga_terendah'    => function($query){
+                $query->select('id','id_project','harga')->orderBy('harga','ASC')->first();
+            }
+        ))
+        ->orderBy('id','ASC')->paginate(2);
+
+        $pendanaan  = $this->pendanaan->select('nama')->get();
+
+        $data       = [
+            'project'   => $project,
+            'pendanaan' => $pendanaan
+        ];
+        return view('pages.our-project')->with($data);
+    }
+
+    public function our_project_show($id)
+    {
+        $project    = $this->project->where('id',$id)->first();
+        $properti   =   $this->properti->where('id_project', $id)
+        ->with(array(
+            'status'    => function($query){
+                $query->select('id', 'text');
+            },
+            'nama_tipe' => function($query){
+                $query->select('id', 'text');
+            },
+            'booking'   => function($query){
+                $query->select('id','tgl_expired');
+            }
+        ))    
+        ->orderBy('id', 'ASC')
+        ->get();
+
+        $fitur          = explode(':',$project->fitur);
+        $sekitar_lokasi = explode(':',$project->sekitar_lokasi);
+
+        $list_blok  = $this->properti->distinct('blok')->select('blok')->orderBy('blok','ASC')->get();
+
+        $data       = [
+            'project'           => $project,
+            'properti'          => $properti,
+            'list_blok'         => $list_blok,
+            'fitur'             => $fitur,
+            'sekitar_lokasi'    => $sekitar_lokasi
+        ];
+
+        return view('pages.project-details')->with($data);
     }
 
     public function about_us_index()

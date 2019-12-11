@@ -4,46 +4,40 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-footer__section">
-                        <h3 class="kt-footer__title">About</h3>
+                        <h3 class="kt-footer__title">Head Office</h3>
                         <div class="kt-footer__content">
-                            Lorem Ipsum is simply dummy text of the printing<br>
-                            and typesetting and typesetting industry has been the <br>
-                            industry's standard dummy text ever since the 1500s,<br>
-                            when an unknown printer took a galley of type.
+                            <strong>Menara Kuningan Lt. 8</strong>
+                            <p>Jl. HR. Rasuna Said Blok X-7 Kav. 5,<br>
+                                Setiabudi, Jakarta Selatan<br>
+                                12490
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="kt-footer__section">
-                        <h3 class="kt-footer__title">Quick Links</h3>
+                        <h3 class="kt-footer__title">Contact Us</h3>
                         <div class="kt-footer__content">
-                            <div class="kt-footer__nav">
-                                <div class="kt-footer__nav-section">
-                                    <a href="#">General Reports</a>
-                                    <a href="#">Dashboart Widgets</a>
-                                    <a href="#">Custom Pages</a>
-                                </div>
-                                <div class="kt-footer__nav-section">
-                                    <a href="#">User Setting</a>
-                                    <a href="#">Custom Pages</a>
-                                    <a href="#">Intranet Settings</a>
-                                </div>
-                            </div>
+                            <h4>
+                                <i class="fa fa-phone-alt mr-2"></i>021 3001 6002
+                            </h4>
+                            <h4>
+                                <i class="fa fa-mobile-alt mr-3"></i>0822 1089 8969
+                            </h4>
+                            </h4>
+                            <h4>
+                                <i class="fa fa-mobile-alt mr-3"></i>0822 1089 8977
+                            </h4>
+                            <h6>
+                                <i class="fa fa-envelope mr-3"></i>secretariat@rantaka.id
+                            </h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="kt-footer__section">
-                        <h3 class="kt-footer__title">Get In Touch</h3>
                         <div class="kt-footer__content">
-                            <form action="" class="kt-footer__subscribe">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Enter Your Email">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-brand" type="button">Join</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <img class="kt-margin-t-30 kt-margin-l-60" src="{{ url('/assets/media/logos/rantaka-lg.png') }}" alt="Rantaka Logo" height="100">
                         </div>
                     </div>
                 </div>
@@ -60,9 +54,9 @@
                     </div>
                 </div>
                 <div class="kt-footer__menu">
-                    <a href="http://keenthemes.com/metronic" target="_blank">Purchase Lisence</a>
+                    {{-- <a href="http://keenthemes.com/metronic" target="_blank">Purchase Lisence</a>
                     <a href="http://keenthemes.com/metronic" target="_blank">Team</a>
-                    <a href="http://keenthemes.com/metronic" target="_blank">Contact</a>
+                    <a href="http://keenthemes.com/metronic" target="_blank">Contact</a> --}}
                 </div>
             </div>
         </div>

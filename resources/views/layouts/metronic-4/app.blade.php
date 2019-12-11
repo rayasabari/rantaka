@@ -165,7 +165,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- end:: Page -->
 
 		<!-- begin::Scrolltop -->
-		<div id="kt_scrolltop" class="kt-scrolltop">
+		<div id="kt_scrolltop" class="kt-scrolltop bg-success">
 			<i class="fa fa-arrow-up"></i>
 		</div>
 		<!-- end::Scrolltop -->

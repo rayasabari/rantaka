@@ -17,6 +17,8 @@
 Route::group(['middleware' => ['web', 'checkblocked']], function () {
     Route::get('/', 'WelcomeController@welcome')->name('welcome');
     Route::get('/our-project', 'WelcomeController@our_project_index');
+    Route::get('/our-project/{id}', 'WelcomeController@our_project_show');
+
     Route::get('/about-us', 'WelcomeController@about_us_index');
     Route::get('/contact-us', 'WelcomeController@contact_us_index');
     Route::post('/refresh-stock', 'WelcomeController@refresh_stock');
