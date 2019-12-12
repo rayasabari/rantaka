@@ -290,9 +290,7 @@
                                             <th class="text-center">Luas Bangunan</th>
                                             <th class="text-center" colspan="2" style="width: 10%">Harga</th>
                                             <th class="text-center">Status</th>
-                                            @if(Auth::user())
-                                                <th class="text-center" style="width: 11%"><i class="flaticon2-settings"></i></th>
-                                            @endif
+                                            <th class="text-center" style="width: 11%"><i class="flaticon2-settings"></i></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -321,10 +319,32 @@
                                                         @if($p->id_status == 1)
                                                             <form method="POST" action="{{ url('/booking/'.$p->id) }}" class="d-inline">
                                                                 @csrf 
-                                                                <button type="submit" class="btn btn-brand btn-sm ">
+                                                                <button type="submit" class="btn btn-brand btn-sm">
                                                                     <i class="fa fa-tag mr-2"></i>Book Now!
                                                                 </button>
                                                             </form>
+                                                        {{-- @elseif($p->id_status == 2)
+                                                            @if( strtotime($p->booking->tgl_expired) <= time())
+                                                                <a class="btn kt-font-brand btn-sm btn-icon d-inline" data-toggle="modal" data-target="#modal_{{ $p->id }}">
+                                                                    <i class="fa fa-tag mr-2"></i>Book Now!
+                                                                </a>
+                                                            @elseif( strtotime($p->booking->tgl_expired) >= time())
+                                                                <a class="btn text-black-50 btn-sm btn-icon d-inline">
+                                                                    <i class="fa fa-tag mr-2"></i>Book Now!
+                                                                </a>
+                                                            @endif --}}
+                                                        @else 
+                                                            <button class="btn btn-brand btn-sm" disabled>
+                                                                <i class="fa fa-tag mr-2"></i>Book Now!
+                                                            </button>
+                                                        @endif
+                                                    </td>
+                                                @else 
+                                                    <td class="text-center align-middle">
+                                                        @if($p->id_status == 1)
+                                                            <button type="button" class="btn btn-brand btn-sm" data-toggle="modal" data-target="#kt_modal_6">
+                                                                <i class="fa fa-tag mr-2"></i>Book Now!
+                                                            </button>
                                                         {{-- @elseif($p->id_status == 2)
                                                             @if( strtotime($p->booking->tgl_expired) <= time())
                                                                 <a class="btn kt-font-brand btn-sm btn-icon d-inline" data-toggle="modal" data-target="#modal_{{ $p->id }}">
@@ -348,6 +368,33 @@
                                 </table>
                             </div>
                         @endforeach
+                        <div class="modal fade" id="kt_modal_6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display: none;">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    {{-- <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Booking</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        </button>
+                                    </div> --}}
+                                    <div class="modal-body text-center text-body">
+                                        <h3 class="kt-font-boldest mt-4 mb-4">Hubungi!</h3> 
+                                        <h4>
+                                            <i class="fa fa-phone-alt mr-2 text-success"></i> 021 3001 6002
+                                        </h4>
+                                        <h6>atau</h6>
+                                        <h4>
+                                            <i class="fa fa-mobile-alt mr-2 text-success"></i> 0822 1089 8969
+                                        </h4>
+                                        <h4>
+                                            <i class="fa fa-mobile-alt mr-2 text-success"></i> 0822 1089 8977
+                                        </h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">Kembali</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

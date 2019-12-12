@@ -7,6 +7,7 @@ use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
 use App\Models\ProjectModel;
 use App\Models\PendanaanModel;
+use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -99,7 +100,7 @@ class WelcomeController extends Controller
         ->orderBy('id','ASC')->paginate(2);
 
         $pendanaan  = $this->pendanaan->select('nama')->get();
-
+        
         $data       = [
             'project'   => $project,
             'pendanaan' => $pendanaan

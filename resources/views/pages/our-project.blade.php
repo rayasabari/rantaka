@@ -32,7 +32,7 @@
                                         </span>
                                     </div>
                                     <div class="kt-widget__info kt-margin-t-5">
-                                        <a href="#" class="kt-widget__title">
+                                        <a href="{{ url('our-project/'.$pr->id) }}" class="kt-widget__title">
                                             {{ $pr->nama }}                                               
                                         </a>
                                         <span class="kt-widget__desc">
@@ -68,13 +68,13 @@
                                     </div>
         
                                     <div class="kt-widget__item flex-fill">
-                                        <span class="kt-widget__subtitel">Tersedia</span>
+                                        <span class="kt-widget__subtitel">Available Unit</span>
                                         <div class="kt-widget__progress d-flex  align-items-center">
                                             <div class="progress" style="height: 5px;width: 100%;">
-                                                <div class="progress-bar kt-bg-success" role="progressbar" style="width: 20%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                <div class="progress-bar kt-bg-success" role="progressbar" style="width: {{ $pr->total_count != 0 ? ($pr->available_count * 100) / $pr->total_count : 0 }}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                             <span class="kt-widget__stat">
-                                                78%
+                                                <span data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="{{ $pr->available_count }} Unit">{{ $pr->total_count != 0 ? number_format(($pr->available_count * 100) / $pr->total_count,1,',','.') : 0 }}%</span>
                                             </span>
                                         </div>
                                     </div>
@@ -85,21 +85,21 @@
                                 </span>
         
                                 <div class="kt-widget__content">
-                                    <div class="kt-widget__details">
+                                    <div class="kt-widget__details" style="width:40%">
                                         <span class="kt-widget__subtitle">Harga Mulai</span>
-                                        <span class="kt-widget__value"><span>Rp </span>{{ $pr->total_count == 0 ? '' : number_format($pr->harga_terendah[0]->harga,0,',','.') }}</span>
+                                        <span class="kt-widget__value"><h3><span>Rp </span>{{ $pr->total_count == 0 ? '' : number_format($pr->harga_terendah[0]->harga,0,',','.') }}</span></h3>
                                     </div>
         
-                                    <div class="kt-widget__details">
+                                    <div class="kt-widget__details" style="width:20%">
                                         <span class="kt-widget__subtitle">Uang Muka Mulai</span>
-                                        <span class="kt-widget__value">10 %</span>
+                                        <span class="kt-widget__value text-center"><h3>10 %</h3></span>
                                     </div>
         
-                                    <div class="kt-widget__details">
+                                    <div class="kt-widget__details" style="width:20%">
                                         <span class="kt-widget__subtitle">Pendanaan</span>
                                         <div class="widget__value">
                                             @foreach($pendanaan as $pd)
-                                                <span class="kt-widget__value">{{ $pd->nama }}</span>
+                                            <i class="fa fa-check-double mr-2 text-success"></i><span class="kt-widget__value">{{ $pd->nama }}</span><br>
                                             @endforeach
                                         </div>                                 
                                     </div>
