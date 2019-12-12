@@ -96,6 +96,8 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--end::Layout Skins -->
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link href="slick/slick.css" rel="stylesheet" type="text/css" />
+		<link href="slick/slick-theme.css" rel="stylesheet" type="text/css" />
 		@yield('head')
 	</head>
 
@@ -143,7 +145,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							<!-- end:: Subheader -->
 
 							<!-- begin:: Content -->
-							<div class="kt-container  kt-grid__item kt-grid__item--fluid">
+							<div class="kt-container kt-grid__item kt-grid__item--fluid">
 
 								<!--Begin::Dashboard 3-->
 								<!--Begin::Row-->
@@ -346,6 +348,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				objek.value = c;
 			}
 		</script>
+		<script type="text/javascript" src="/slick/slick.js"></script>
 		@yield('footer_scripts')
 	</body>
 

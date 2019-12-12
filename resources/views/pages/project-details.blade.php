@@ -55,8 +55,8 @@
         <div class="col-lg-12">
             <div class="kt-portlet">
                 <div class="kt-portlet__body">
-                    <div class="row kt-margin-b-40 kt-margin-t-10">
-                        <img src="{{ url('storage/project/'.$project->img_logo) }}" alt="" width="650" class="mx-auto d-block img-fluid">
+                    <div class="row kt-margin-b-40 kt-margin-t-20">
+                        <img src="{{ url('storage/project/'.$project->img_logo) }}" alt="" width="400" class="mx-auto d-block img-fluid">
                     </div>
                     <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-success" role="tablist">
                         <li class="nav-item">
@@ -110,13 +110,40 @@
                         </div>
                         <div class="tab-pane fade" id="tab_desain" role="tabpanel">
                             <div class="row">
-                                <div class="col-lg-5">
+                                {{-- <div class="col-lg-5">
                                     <img class="img-thumbnail" src="{{ url('storage/project/'.$project->img_design) }}" width="100%" alt="">
                                 </div>
                                 <div class="col-lg-7">
                                     <img class="img-thumbnail" src="{{ url('storage/project/'.$project->img_layout) }}" width="100%" alt="">
+                                </div> --}}
+                                <div class="col-lg-6">
+                                    <div class="kt-section">
+                                        <div class="kt-section__title">
+                                            Tipe 60
+                                        </div>
+                                        <div class="kt-section__content">
+                                            <div class="row">
+                                                <img src="{{ url('storage/project/1_design_1.jpg') }}" width="100%" class="img-thumbnail" alt="">
+                                                <img src="{{ url('storage/project/1_layout_1.jpg') }}" width="100%" class="img-thumbnail" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>                        </div>
+                                <div class="col-lg-6">
+                                    <div class="kt-section">
+                                        <div class="kt-section__title">
+                                            Tipe 30
+                                        </div>
+                                        <div class="kt-section__content">
+                                            <div class="row">
+                                                <img src="{{ url('storage/project/1_design_2.jpg') }}" width="100%" class="img-thumbnail" alt="">
+                                                <img src="{{ url('storage/project/1_layout_2.jpg') }}" width="100%" class="img-thumbnail" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane fade" id="tab_spek" role="tabpanel">
                             <div class="row">
                                 <div class="col-lg-3">
@@ -345,16 +372,6 @@
                                                             <button type="button" class="btn btn-brand btn-sm" data-toggle="modal" data-target="#kt_modal_6">
                                                                 <i class="fa fa-tag mr-2"></i>Book Now!
                                                             </button>
-                                                        {{-- @elseif($p->id_status == 2)
-                                                            @if( strtotime($p->booking->tgl_expired) <= time())
-                                                                <a class="btn kt-font-brand btn-sm btn-icon d-inline" data-toggle="modal" data-target="#modal_{{ $p->id }}">
-                                                                    <i class="fa fa-tag mr-2"></i>Book Now!
-                                                                </a>
-                                                            @elseif( strtotime($p->booking->tgl_expired) >= time())
-                                                                <a class="btn text-black-50 btn-sm btn-icon d-inline">
-                                                                    <i class="fa fa-tag mr-2"></i>Book Now!
-                                                                </a>
-                                                            @endif --}}
                                                         @else 
                                                             <button class="btn btn-brand btn-sm" disabled>
                                                                 <i class="fa fa-tag mr-2"></i>Book Now!

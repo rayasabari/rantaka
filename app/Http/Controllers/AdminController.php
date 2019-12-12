@@ -218,6 +218,7 @@ class AdminController extends Controller
             'booking'   => $booking
         ];
 
+
         return view('pages.admin.booking-index')->with($data);
     }
 

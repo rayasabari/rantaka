@@ -32,13 +32,13 @@
                     </div>
                 </div>
                 <div class="kt-portlet__body">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th style="width: 1%">#</th>
                                 <th class="text-left" style="width: 10%">Kode</th>
                                 <th class="text-left" style="width:5%">Unit</th>
-                                <th class="text-left">Nama</th>
+                                <th class="text-left" style="width: 12%">Nama</th>
                                 <th class="text-left">No. Handphone</th>
                                 <th class="text-left">Pendanaan</th>
                                 <th class="text-left">Uang Muka</th>
@@ -72,8 +72,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit mr-1"></i>Edit
+                                        <a href="{{ url('/booking/edit/'.$b->id) }}" class="btn btn-label-info btn-pill btn-sm">
+                                            Edit
                                         </a>
                                     </td>
                                 </tr>

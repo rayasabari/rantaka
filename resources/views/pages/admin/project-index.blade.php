@@ -63,8 +63,8 @@
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="text-danger kt-font-bolder">{{ $p->booked_count }}</h5></td>
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="kt-font-brand kt-font-bolder">{{ $p->deal_count }}</h5></td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/project/edit/'.$p->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit mr-1"></i>Edit
+                                        <a href="{{ url('/project/edit/'.$p->id) }}" class="btn btn-label-primary btn-pill btn-sm">
+                                            Edit
                                         </a>
                                     </td>
                                 </tr>

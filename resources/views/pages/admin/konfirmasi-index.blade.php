@@ -76,14 +76,14 @@
                                     </td>
                                     <td class="text-center align-middle">
                                         @if($k->id_status == 1)
-                                            <button class="btn btn-primary btn-sm" disabled>
-                                                <i class="fa fa-check-double mr-2"></i>Approve
+                                            <button class="btn btn-label-primary btn-pill btn-sm" disabled>
+                                                Approve
                                             </button>
                                         @else
                                             <form method="post" action="{{ url('/konfirmasi/approve/'.$k->id) }}" class="d-inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-primary btn-sm" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Approve?">
-                                                    <i class="fa fa-check-double mr-2"></i>Approve
+                                                <button type="submit" class="btn btn-label-primary btn-pill btn-sm" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Approve?">
+                                                    Approve
                                                 </button>
                                             </form>
                                         @endif

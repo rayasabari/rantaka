@@ -42,7 +42,7 @@
                                 <th class="text-left" style="width: 70%">Nama</th>
                                 <th class="text-center" style="width: 11%">Total Booking</th>
                                 <th class="text-center" style="width: 11%">Total Booked</th>
-                                <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
+                                <th class="text-center" style="width: "><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,8 +53,8 @@
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="text-primary kt-font-bolder">{{ $m->total_booking_count }}</h5></td>
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="text-success kt-font-bolder">{{ $m->total_booked_count }}</h5></td>
                                     <td class="text-center align-middle">
-                                        <a href="{{ url('/marketing/edit/'.$m->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit mr-1"></i>Edit
+                                        <a href="{{ url('/marketing/edit/'.$m->id) }}" class="btn btn-label-primary btn-pill btn-sm">
+                                            Edit
                                         </a>
                                     </td>
                                 </tr>
