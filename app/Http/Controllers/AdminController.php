@@ -380,22 +380,32 @@ class AdminController extends Controller
             'lokasi'        => 'required',
             'total_luas'    => 'required',
             'thn_bangun'    => 'required|max:4',
-            'img_map'       => 'image|max:2048'
+            'img_map'       => 'image|max:2048',
+            'img_logo'      => 'image|max:2048'
         ]);
 
         $project                = $this->project;
         $project->nama          = $request->nama;
         $project->lokasi        = $request->lokasi;
+        $project->latitude      = $request->latitude;
+        $project->longitude     = $request->longitude;
         $project->total_luas    = $request->total_luas;
         $project->thn_bangun    = $request->thn_bangun;
         if($request->hasFile('img_map')){
-            $filename = time().'_'.str_replace(' ','_', $request->nama ) .'_'. $request->total_luas .'.'. request()->img_map->getClientOriginalExtension();
-            $request->img_map->storeAs('project', $filename);
-            $project->img_map       = $filename;
+            $filename_map = time().'_'.str_replace(' ','_', $request->nama ) .'_map.'. request()->img_map->getClientOriginalExtension();
+            $request->img_map->storeAs('project', $filename_map);
+            $project->img_map       = $filename_map;
+        }
+        if($request->hasFile('img_logo')){
+            $filename_logo = time().'_'.str_replace(' ','_', $request->nama ) .'_logo.'. request()->img_logo->getClientOriginalExtension();
+            $request->img_logo->storeAs('project', $filename_logo);
+            $project->img_logo       = $filename_logo;
         }
         $project->save();
 
-        return redirect('/project')->with('success','Project berhasil ditambhan');
+        $id_project = $this->project->select('id')->orderBy('id','DESC')->first()->id;
+
+        return redirect('/project/edit/'.$id_project)->with('success','Project berhasil ditambhan');
     }
 
     public function project_edit($id)
@@ -417,25 +427,64 @@ class AdminController extends Controller
             'lokasi'        => 'required',
             'total_luas'    => 'required',
             'thn_bangun'    => 'required|max:4',
-            'img_map'       => 'image|max:2048'
+            'img_map'       => 'image|max:2048',
+            'img_logo'      => 'image|max:2048'
         ]);
-
+        
         if($request->hasFile('img_map')){
             Storage::delete('project/'.$project->img_map);
-            $filename = time() .'_'. str_replace(' ','_', $project->nama ) .'_'. $request->total_luas .'.'. request()->img_map->getClientOriginalExtension();
-            $request->img_map->storeAs('project', $filename);
+            $filenma_map = time() .'_'. str_replace(' ','_', $project->nama ) .'_map.'. request()->img_map->getClientOriginalExtension();
+            $request->img_map->storeAs('project', $filenma_map);
             $this->project->where('id',$id)
             ->update([
-                'img_map'       => $filename,
+                'img_map'       => $filenma_map,
+            ]);
+        }
+        if($request->hasFile('img_logo')){
+            Storage::delete('project/'.$project->img_logo);
+            $filename_logo = time() .'_'. str_replace(' ','_', $project->nama ) .'_logo.'. request()->img_logo->getClientOriginalExtension();
+            $request->img_logo->storeAs('project', $filename_logo);
+            $this->project->where('id',$id)
+            ->update([
+                'img_logo'       => $filename_logo,
             ]);
         }
 
         $this->project->where('id',$id)->update([
-            'nama'          => $request->nama,
-            'lokasi'        => $request->lokasi,
-            'total_luas'    => $request->total_luas,
-            'thn_bangun'    => $request->thn_bangun
+            'nama'              => $request->nama,
+            'deskripsi'         => $request->deskripsi,
+            'lokasi'            => $request->lokasi,
+            'latitude'          => $request->latitude,
+            'longitude'         => $request->longitude,
+            'total_luas'        => $request->total_luas,
+            'thn_bangun'        => $request->thn_bangun,
+            'spek_pondasi'      => $request->spek_pondasi,
+            'spek_dinding'      => $request->spek_dinding,
+            'spek_struktur'     => $request->spek_struktur,
+            'spek_lantai'       => $request->spek_lantai,
+            'spek_kusen'        => $request->spek_kusen,
+            'spek_pintu'        => $request->spek_pintu,
+            'spek_jendela'      => $request->spek_jendela,
+            'spek_rangka_atap'  => $request->spek_rangka_atap,
+            'spek_penutup_atap' => $request->spek_penutup_atap,
+            'spek_plafond'      => $request->spek_plafond,
+            'spek_pintu_km'     => $request->spek_pintu_km,
+            'spek_kamar_mandi'  => $request->spek_kamar_mandi,
+            'spek_listrik'      => $request->spek_listrik,
+            'spek_air'          => $request->spek_air,
+            'spek_carport'      => $request->spek_carport,
+            'spek_cat'          => $request->spek_cat
         ]);
+
+        if($request->visibility == 1){
+            $this->project->where('id',$id)->update([
+                'visibility'    => 1,
+            ]);
+        }else{
+            $this->project->where('id',$id)->update([
+                'visibility'    => 0,
+            ]);
+        }
 
         return back()->with('success','Data project berhasil dirubah!');
     }

@@ -19,6 +19,7 @@ class CreateProjectTable extends Migration
             $table->longText('deskripsi')->nullable();
             $table->longText('fitur')->nullable();
             $table->longText('lokasi')->nullable();
+            $table->longText('sekitar_lokasi')->nullable();
             $table->string('latitude',75)->nullable();
             $table->string('longitude',75)->nullable();
             $table->double('total_luas')->nullable();
@@ -44,6 +45,7 @@ class CreateProjectTable extends Migration
             $table->string('img_layout',50)->nullable();
             $table->string('img_harga',50)->nullable();
             $table->double('booking_fee')->nullable();
+            $table->integer('visibility')->nullable();
             $table->timestamps();
         });
     }
