@@ -7,6 +7,8 @@ use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
 use App\Models\ProjectModel;
 use App\Models\PendanaanModel;
+use App\Models\ImgTipeModel;
+use App\Models\TipeRumahModel;
 use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 use Auth;
@@ -17,7 +19,9 @@ class WelcomeController extends Controller
             $status_properti,
             $booking,
             $project,
-            $pendanaan;
+            $pendanaan,
+            $tipe_rumah,
+            $img_tipe;
 
     public function __construct()
     {
@@ -26,6 +30,8 @@ class WelcomeController extends Controller
         $this->booking          = New BookingModel;
         $this->project          = New ProjectModel;
         $this->pendanaan        = New PendanaanModel;
+        $this->tipe_rumah       = New TipeRumahModel;
+        $this->img_tipe         = New ImgTipeModel;
     }
     /**
      * Show the application dashboard.
@@ -110,7 +116,18 @@ class WelcomeController extends Controller
 
     public function our_project_show($id)
     {
-        $project    = $this->project->where('id',$id)->first();
+        $project    = $this->project->where('id',$id)
+        ->with(array(
+            'img_tipe' => function($query){
+                $query->select('id','id_project','id_tipe_rumah','kategori','file')->orderBy('id_tipe_rumah','ASC')
+                ->with(array(
+                    'tipe_rumah'    => function($query){
+                        $query->select('id','text');
+                    }
+                ));
+            }
+        ))->first();
+
         $properti   =   $this->properti->where('id_project', $id)
         ->with(array(
             'status'    => function($query){

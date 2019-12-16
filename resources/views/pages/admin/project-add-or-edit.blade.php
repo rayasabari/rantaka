@@ -26,6 +26,11 @@
                     {{ session('error') }}
                 </div>
             @endif
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ implode('', $errors->all(':message')) }}
+                </div>
+            @endif
             <div class="kt-portlet kt-portlet--tabs">
                 <div class="kt-portlet__head">
                     <div class="kt-portlet__head-label">
@@ -34,19 +39,19 @@
                     <div class="kt-portlet__head-toolbar">
                         <ul class="nav nav-tabs nav-tabs-bold nav-tabs-line-success nav-tabs-line nav-tabs-line-right" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active mr-2" data-toggle="tab" href="#info_tab" role="tab">
+                                <a class="nav-link active mr-2" data-toggle="tab" href="#info_tab" role="tab" id="link_info">
                                     <i class="fa fa-file-alt mr-2"></i> Info 
                                 </a>
                             </li>
                             @if($act == 'edit')
                                 <li class="nav-item">
-                                    <a class="nav-link mr-2" data-toggle="tab" href="#spek_tab" role="tab">
+                                    <a class="nav-link mr-2" data-toggle="tab" href="#spek_tab" role="tab" id="link_spek">
                                         <i class="fa fa-cog mr-2"></i> Spesifikasi
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#img_tab" role="tab">
-                                        <i class="fa fa-image mr-2"></i> Gambar
+                                    <a class="nav-link" data-toggle="tab" href="#img_tab" role="tab" id="link_img">
+                                        <i class="fa fa-image mr-2"></i> Design & Layout
                                     </a>
                                 </li>
                             @endif
@@ -111,7 +116,7 @@
                                         <div class="col-lg-9 col-xl-6">
                                             <div class="input-group">
                                                 <input type="number" step=".01" name="total_luas" class="form-control" value="{{ $act == 'edit' ? old('total_luas', number_format($project->total_luas,2,'.',',') ) : old('total_luas') }}" placeholder="" aria-describedby="basic-addon1">
-                                                <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
+                                                <div class="input-group-prepend"><span class="input-group-text">Ha</div>
                                             </div>
                                             @error('total_luas')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -173,6 +178,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if($act == 'add')
+                                    <div class="kt-portlet__foot">
+                                        <div class="kt-form__actions">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-xl-3">
+                                                </div>
+                                                <div class="col-lg-9 col-xl-9">
+                                                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;
+                                                    <a href="{{ url('/project') }}" class="btn btn-secondary">Kembali</a>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         @if($act == 'edit')
@@ -326,170 +346,130 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="kt-portlet__foot">
+                                <div class="kt-form__actions">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-xl-3">
+                                        </div>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <button type="submit" class="btn btn-success">Submit</button>&nbsp;
+                                            <a href="{{ url('/project') }}" class="btn btn-secondary">Kembali</a>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="tab-pane fade" id="img_tab" role="tabpanel">
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+                                <div class="row mb-4">
+                                    <div class="col-lg-12">
+                                        <button type="button" class="btn btn-label-success btn-bold btn-sm" data-toggle="modal" data-target="#modal_upload">Add New</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @foreach($img_tipe as $it)
+                                        <div class="col-xl-3 col-lg-4 col-md-6 order-lg-2 order-xl-1 kt-img-rounded">
+                                            <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
+                                                <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill" style="cursor: pointer;">
+                                                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url('storage/project/{{ $it->file }}')">
+                                                        <h4 class="kt-widget19__title kt-font-light"></h4>
+                                                        <div class="kt-widget19__shadow"></div>
+                                                        <div class="kt-widget19__labels">
+                                                            <form method="post" action="{{ url('project/delete/img_tipe/'.$it->id) }}">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-danger" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Delete">
+                                                                    <i class="mr-n2 text-right flaticon-delete-1"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="kt-portlet__body">
+                                                    <div class="kt-widget19__wrapper mb-n1 mt-n2">
+                                                        <div class="kt-widget19__content mb-n2">
+                                                            <div class="kt-widget19__info ml-n3">
+                                                                <a class="kt-widget19__username text-center text-black-50">
+                                                                    {{ $it->kategori .' - Tipe '. $it->tipe_rumah->text }}
+                                                                </a>
+                                                            </div>
+                                                            <div class="kt-widget19__stats">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         @endif
                     </div>      
                 </div>
-                <div class="kt-portlet__foot">
-                    <div class="kt-form__actions">
-                        <div class="row">
-                            <div class="col-lg-3 col-xl-3">
-                            </div>
-                            <div class="col-lg-9 col-xl-9">
-                                <button type="submit" class="btn btn-success">Submit</button>&nbsp;
-                                <a href="{{ url('/project') }}" class="btn btn-secondary">Kembali</a>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            {{-- <div class="kt-portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title">{{ ucwords($act) }} Project</h3>
-                    </div>
-                    <div class="kt-portlet__head-toolbar">
-                        <div class="kt-portlet__head-wrapper">
-                        </div>
-                    </div>
-                </div>
-                <form class="kt-form kt-form--label-right" method="post" action="{{ $act == 'add' ? url('/project/add') : url('/project/edit/'.$project->id) }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="kt-portlet__body">
-                        <div class="kt-section kt-section--first">
-                            <div class="kt-section__body">
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Nama</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <input class="form-control @error('nama') is-invalid @enderror" name="nama" type="text" value="{{ $act == 'edit' ? old('nama', $project->nama) : old('nama') }}">
-                                        @error('nama')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror  
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Deskripsi</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <textarea class="form-control" name="deskripsi">{{ $act == 'edit' ? old('deskripsi', $project->deskripsi) : old('deskripsi') }}</textarea>
-                                        @error('deskripsi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Lokasi</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <textarea class="form-control" name="lokasi">{{ $act == 'edit' ? old('lokasi', $project->lokasi) : old('lokasi') }}</textarea>
-                                        @error('lokasi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Latitude</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <input class="form-control @error('latitude') is-invalid @enderror" name="latitude" type="text" value="{{ $act == 'edit' ? old('latitude', $project->latitude) : old('latitude') }}">
-                                        @error('latitude')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Longitude</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <input class="form-control @error('longitude') is-invalid @enderror" name="longitude" type="text" value="{{ $act == 'edit' ? old('longitude', $project->longitude) : old('longitude') }}">
-                                        @error('longitude')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Total Luas</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <div class="input-group">
-                                            <input type="number" step=".01" name="total_luas" class="form-control" value="{{ $act == 'edit' ? old('total_luas', number_format($project->total_luas,2,'.',',') ) : old('total_luas') }}" placeholder="" aria-describedby="basic-addon1">
-                                            <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
-                                        </div>
-                                        @error('total_luas')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Tahun Bangun</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <input class="form-control @error('thn_bangun') is-invalid @enderror" name="thn_bangun" type="text" value="{{ $act == 'edit' ? old('thn_bangun', $project->thn_bangun) : old('thn_bangun') }}" maxlength="4">
-                                        @error('thn_bangun')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Site Plan</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <div class="custom-file">
-                                            <input name="img_map" type="file" class="custom-file-input text-left @error('img_map') is-invalid @enderror" id="img_map">
-                                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                                            @if($act == 'edit') 
-                                                <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
-                                                    <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_map }}');"></div>
-                                                </div>
-                                            @endif
-                                            @error('img_map')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Logo Project</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <div class="custom-file">
-                                            <input name="img_logo" type="file" class="custom-file-input text-left @error('img_logo') is-invalid @enderror" id="img_logo">
-                                            <label class="custom-file-label" for="customFile">Pilih file</label>
-                                            @if($act == 'edit') 
-                                                <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
-                                                    <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_logo }}');"></div>
-                                                </div>
-                                            @endif
-                                            @error('img_logo')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">visibility</label>
-                                    <div class="col-lg-9 col-xl-6">
-                                        <span class="kt-switch kt-switch--success">
-                                            <label>
-                                                <input type="checkbox" value="1" {{ $project->visibility == 1 ? 'checked' : '' }} name="visibility">
-                                                <span></span>
-                                            </label>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="kt-portlet__foot">
-                        <div class="kt-form__actions">
-                            <div class="row">
-                                <div class="col-lg-3 col-xl-3">
-                                </div>
-                                <div class="col-lg-9 col-xl-9">
-                                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;
-                                    <a href="{{ url('/project') }}" class="btn btn-secondary">Kembali</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div> --}}
         </div>
     </div>
+    @if($act == 'edit')
+        <div class="modal fade" id="modal_upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Foto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post" action="{{ url('project/upload/img_tipe/'.$project->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="exampleSelect1">Tipe Rumah</label>
+                                        <select class="form-control" name="tipe_rumah" required>
+                                            <option>Pilih</option>
+                                            @foreach($tipe_rumah as $tr)
+                                                <option value="{{ $tr->id }}">Tipe {{ $tr->text }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleSelect1">Kategori</label>
+                                        <select class="form-control" name="kategori" required>
+                                            <option>Pilih</option>
+                                            @foreach($kategori as $kt)
+                                                <option value="{{ $kt['text'] }}">{{ $kt['text'] }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>File Browser</label>
+                                        <div class="custom-file">
+                                            <input type="file" name="img_tipe" class="custom-file-input" id="customFile" required>
+                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
+@endsection
+
+@section('footer_scripts')
+    <script>
+        $( document ).ready(function() {
+            $('#link_info, #link_spek').click(function(){
+                $('.kt-portlet__foot').fadeIn(1000);
+            });
+
+            $('#link_img').click(function(){
+                $('.kt-portlet__foot').hide();
+            });
+        });
+    </script>
 @endsection

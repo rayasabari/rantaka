@@ -11,6 +11,7 @@ use App\Models\TipeRUmahModel;
 use App\Models\StatusBookingModel;
 use App\Models\KonfirmasiModel;
 use App\Models\MarketingModel;
+use App\Models\ImgTipeModel;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -23,6 +24,7 @@ class AdminController extends Controller
             $booking,
             $status_booking,
             $konfirmasi,
+            $img_tipe,
             $marketing;
 
     public function __construct()
@@ -35,6 +37,7 @@ class AdminController extends Controller
         $this->status_booking   = New StatusBookingModel;
         $this->konfirmasi       = New KonfirmasiModel;
         $this->marketing        = New MarketingModel;
+        $this->img_tipe         = New ImgTipeModel;
         $this->middleware('auth');
     }
 
@@ -410,9 +413,26 @@ class AdminController extends Controller
 
     public function project_edit($id)
     {
-        $project    = $this->project->where('id',$id)->first();
-        $data       = [
+        $project        = $this->project->where('id',$id)->first();
+        $tipe_rumah     = $this->tipe_rumah->select('id','text')->orderBy('text')->get();
+        $img_tipe       = $this->img_tipe->where('id_project',$id)
+        ->with(array(
+            'tipe_rumah'    => function($query){
+                $query->select('id','text');
+            }
+        ))->orderBy('id_tipe_rumah','ASC')
+        ->get();
+
+        $kategori       = [
+            ['text' =>  'Design'],
+            ['text' =>  'Layout']
+        ];
+
+        $data           = [
             'project'       => $project,
+            'tipe_rumah'    => $tipe_rumah,
+            'kategori'      => $kategori,
+            'img_tipe'      => $img_tipe
         ];
 
         return view('pages.admin.project-add-or-edit')->with($data);
@@ -487,6 +507,35 @@ class AdminController extends Controller
         }
 
         return back()->with('success','Data project berhasil dirubah!');
+    }
+
+    public function project_img_tipe_upload(Request $request, $id)
+    {
+        $project    = $this->project->where('id',$id)->select('id','nama')->first();
+        $request->validate([
+            'tipe_rumah'    => 'required',
+            'kategori'      => 'required',
+            'img_tipe'      => 'required|image|max:2048'
+        ]);
+
+        $filename = time() .'_'. str_replace(' ','_', $project->nama ) .'_'.$request->kategori. '_'. $request->tipe_rumah .'.'. request()->img_tipe->getClientOriginalExtension();
+        $request->img_tipe->storeAs('project', $filename);
+
+        $img_tipe                   = $this->img_tipe;
+        $img_tipe->id_project       = $id;
+        $img_tipe->id_tipe_rumah    = $request->tipe_rumah;
+        $img_tipe->kategori         = $request->kategori;
+        $img_tipe->file             = $filename;
+        $img_tipe->save();
+
+        return back()->with('success','Foto berhasil ditambah!');
+    }
+
+    public function project_img_tipe_destroy($id)
+    {
+        $this->img_tipe->destroy($id);
+
+        return back()->with('success','Foto berhasil dihapus!');
     }
 
     public function marketing_index()

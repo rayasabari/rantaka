@@ -28,6 +28,11 @@
             .p-logo {margin-top: -90px;margin-bottom: 50px;}
         }
     </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('a[data-rel^=lightcase]').lightcase();
+        });
+    </script>
 @endsection
 
 @section('subheader')
@@ -110,38 +115,37 @@
                         </div>
                         <div class="tab-pane fade" id="tab_desain" role="tabpanel">
                             <div class="row">
-                                {{-- <div class="col-lg-5">
-                                    <img class="img-thumbnail" src="{{ url('storage/project/'.$project->img_design) }}" width="100%" alt="">
-                                </div>
-                                <div class="col-lg-7">
-                                    <img class="img-thumbnail" src="{{ url('storage/project/'.$project->img_layout) }}" width="100%" alt="">
-                                </div> --}}
-                                <div class="col-lg-6">
-                                    <div class="kt-section">
-                                        <div class="kt-section__title">
-                                            Tipe 60
-                                        </div>
-                                        <div class="kt-section__content">
-                                            <div class="row">
-                                                <img src="{{ url('storage/project/1_design_1.jpg') }}" width="100%" class="img-thumbnail" alt="">
-                                                <img src="{{ url('storage/project/1_layout_1.jpg') }}" width="100%" class="img-thumbnail" alt="">
+                                @foreach($project->img_tipe as $it)
+                                    <div class="col-xl-3 col-lg-4 col-md-6 order-lg-2 order-xl-1 kt-img-rounded">
+                                        <div class="kt-portlet kt-portlet--height-fluid kt-widget19">
+                                            <div class="kt-portlet__body kt-portlet__body--fit kt-portlet__body--unfill" style="cursor: pointer;">
+                                                <a data-rel="lightcase:myCollection" href="{{ url('storage/project/'.$it->file) }}" data-rel="lightcase" title="Tipe {{ $it->tipe_rumah->text .' - '.  $it->kategori  }}">
+                                                    <div class="kt-widget19__pic kt-portlet-fit--top kt-portlet-fit--sides" style="min-height: 300px; background-image: url('storage/project/{{ $it->file }}')">
+                                                        <h6 class="kt-widget19__title kt-font-light">
+                                                            Klik untuk perbesar
+                                                        </h6>
+                                                        <div class="kt-widget19__shadow"></div>
+                                                        <div class="kt-widget19__labels">
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="kt-portlet__body">
+                                                <div class="kt-widget19__wrapper mb-n1 mt-n2">
+                                                    <div class="kt-widget19__content mb-n2">
+                                                        <div class="kt-widget19__info ml-n3">
+                                                            <a class="kt-widget19__username text-center text-black-50">
+                                                                {{ $it->kategori .' - Tipe '. $it->tipe_rumah->text }}
+                                                            </a>
+                                                        </div>
+                                                        <div class="kt-widget19__stats">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="kt-section">
-                                        <div class="kt-section__title">
-                                            Tipe 30
-                                        </div>
-                                        <div class="kt-section__content">
-                                            <div class="row">
-                                                <img src="{{ url('storage/project/1_design_2.jpg') }}" width="100%" class="img-thumbnail" alt="">
-                                                <img src="{{ url('storage/project/1_layout_2.jpg') }}" width="100%" class="img-thumbnail" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab_spek" role="tabpanel">
@@ -436,8 +440,5 @@
         // The marker, positioned at marker
         var marker = new google.maps.Marker({position: marker, map: map});
         }
-    </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI3teHsTtMtBRrHiHG07PXaOH99ZuME30&callback=initMap">
     </script>
 @endsection

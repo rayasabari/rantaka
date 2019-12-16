@@ -17,7 +17,7 @@ class CreateImgTipeTable extends Migration
             $table->bigIncrements('id');
             $table->integer('id_project');
             $table->integer('id_tipe_rumah');
-            $table->integer('kategori');
+            $table->string('kategori', 9);
             $table->string('file',100);
             $table->timestamps();
         });

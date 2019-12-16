@@ -28,4 +28,9 @@ class PropertiModel extends Model
         return $this->hasOne('App\Models\BookingModel','id','id_booking');
     }
 
+    public function img_tipe()
+    {
+        return $this->hasMany('App\Models\ImgTipeModel','id_project','id');
+    }
+
 }

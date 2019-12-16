@@ -98,6 +98,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
 		<link href="slick/slick.css" rel="stylesheet" type="text/css" />
 		<link href="slick/slick-theme.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="lightcase/css/lightcase.css">
+		<script type="text/javascript" src="lightcase/js/lightcase.js"></script>
 		@yield('head')
 	</head>
 
@@ -320,13 +323,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Global Theme Bundle -->
 
 		<!--begin::Page Vendors(used by this page) -->
-		<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
-
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAI3teHsTtMtBRrHiHG07PXaOH99ZuME30&callback=initMap"></script>
+		
 		<!--end::Page Vendors -->
-
+		
 		<!--begin::Page Scripts(used by this page) -->
 		<script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
-
+		
 		<!--end::Page Scripts -->
 		<script>
 			/* FORMAT ANGKA 3 titik*/

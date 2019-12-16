@@ -38,4 +38,9 @@ class ProjectModel extends Model
         return $this->hasMany('App\Models\PropertiModel','id_project','id');
     }
 
+    public function img_tipe()
+    {
+        return $this->hasMany('App\Models\ImgTipeModel','id_project','id');
+    }
+
 }
