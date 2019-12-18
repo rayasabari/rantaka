@@ -169,6 +169,13 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('marketing/edit/{id}', 'AdminController@marketing_edit');
     Route::post('marketing/edit/{id}', 'AdminController@marketing_update');
 
+    Route::get('slider', 'AdminController@slider_index');
+    Route::get('slider/add', 'AdminController@slider_add');
+    Route::post('slider/add', 'AdminController@slider_store');
+    Route::get('slider/edit/{id}', 'AdminController@slider_edit');
+    Route::post('slider/edit/{id}', 'AdminController@slider_update');
+    Route::delete('slider/delete/{id}', 'AdminController@slider_destroy');
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);

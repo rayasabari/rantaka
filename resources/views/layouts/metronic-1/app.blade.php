@@ -101,7 +101,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="assets-2/css/skins/aside/dark.css" rel="stylesheet" type="text/css" />
 
 		<!--end::Layout Skins -->
-        <link rel="shortcut icon" href="assets-2/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="assets-2/media/logos/favicon.ico" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="lightcase/css/lightcase.css">
+		<script type="text/javascript" src="lightcase/js/lightcase.js"></script>
         @yield('head')
 	</head>
 

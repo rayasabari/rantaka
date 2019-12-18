@@ -12,6 +12,7 @@ use App\Models\StatusBookingModel;
 use App\Models\KonfirmasiModel;
 use App\Models\MarketingModel;
 use App\Models\ImgTipeModel;
+use App\Models\SliderModel;
 use Illuminate\Support\Facades\Storage;
 use Auth;
 
@@ -25,7 +26,8 @@ class AdminController extends Controller
             $status_booking,
             $konfirmasi,
             $img_tipe,
-            $marketing;
+            $marketing,
+            $slider;
 
     public function __construct()
     {
@@ -38,6 +40,7 @@ class AdminController extends Controller
         $this->konfirmasi       = New KonfirmasiModel;
         $this->marketing        = New MarketingModel;
         $this->img_tipe         = New ImgTipeModel;
+        $this->slider           = New SliderModel;
         $this->middleware('auth');
     }
 
@@ -394,6 +397,7 @@ class AdminController extends Controller
         $project->longitude     = $request->longitude;
         $project->total_luas    = $request->total_luas;
         $project->thn_bangun    = $request->thn_bangun;
+        $project->visibility    = $request->visibility;
         if($request->hasFile('img_map')){
             $filename_map = time().'_'.str_replace(' ','_', $request->nama ) .'_map.'. request()->img_map->getClientOriginalExtension();
             $request->img_map->storeAs('project', $filename_map);
@@ -493,18 +497,9 @@ class AdminController extends Controller
             'spek_listrik'      => $request->spek_listrik,
             'spek_air'          => $request->spek_air,
             'spek_carport'      => $request->spek_carport,
-            'spek_cat'          => $request->spek_cat
+            'spek_cat'          => $request->spek_cat,
+            'visibility'        => $request->visibility
         ]);
-
-        if($request->visibility == 1){
-            $this->project->where('id',$id)->update([
-                'visibility'    => 1,
-            ]);
-        }else{
-            $this->project->where('id',$id)->update([
-                'visibility'    => 0,
-            ]);
-        }
 
         return back()->with('success','Data project berhasil dirubah!');
     }
@@ -592,5 +587,95 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success','Data Marketing berhasil dirubah!');
+    }
+
+    public function slider_index()
+    {
+        $slider     = $this->slider->orderBy('id','DESC')->paginate(10);
+        $data       = [
+            'slider'    => $slider
+        ];
+
+        return view('pages.admin.slider-index')->with($data);
+    }
+
+    public function slider_add()
+    {
+        return view('pages.admin.slider-add-or-edit');
+    }
+
+    public function slider_store(Request $request)
+    {
+        $request->validate([
+            'urutan'        => 'required',
+            'img_slider'    => 'required|image|max:4096'
+        ]);
+
+        $filename           = time().'_'. str_replace(' ','_', request()->img_slider->getClientOriginalName());
+        $original_filename  = str_replace(' ','_', request()->img_slider->getClientOriginalName());
+        $request->img_slider->storeAs('slider', $filename);
+
+        $slider                     = $this->slider;
+        $slider->nama_file          = $filename;
+        $slider->nama_file_original = $original_filename;
+        $slider->judul              = $request->judul;
+        $slider->deskripsi          = $request->deskripsi;
+        $slider->url                = $request->url;
+        $slider->urutan             = $request->urutan;
+        $slider->visibility         = $request->visibility;
+        $slider->save();
+
+        return redirect('/slider')->with('success','Slider berhasil ditambah!');
+    }
+
+    public function slider_edit($id)
+    {
+        $slider     = $this->slider->where('id',$id)->first();
+        $data       = [
+            'slider'    => $slider
+        ];
+        return view('pages.admin.slider-add-or-edit')->with($data);
+    }
+
+    public function slider_update(Request $request, $id)
+    {
+        $request->validate([
+            'urutan'            => 'required',
+            'img_slider'        => 'image|max:4096'
+        ]);
+        
+        $slider     = $this->slider->where('id',$id)->select('id','nama_file')->first();
+        if($request->hasFile('img_slider')){
+            Storage::delete('slider/'.$slider->nama_file);
+            $filename           = time().'_'. str_replace(' ','_', request()->img_slider->getClientOriginalName());
+            $original_filename  = str_replace(' ','_', request()->img_slider->getClientOriginalName());
+            $request->img_slider->storeAs('slider', $filename);
+            $this->slider->where('id',$id)
+            ->update([
+                'nama_file'             => $filename,
+                'nama_file_original'    => $original_filename
+            ]);
+        }
+
+        $this->slider->where('id',$id)
+        ->update([
+            'judul'         => $request->judul,
+            'deskripsi'     => $request->deskripsi,
+            'url'           => $request->url,
+            'urutan'        => $request->urutan,
+            'visibility'    => $request->visibility
+        ]);
+
+        return back()->with('success','Slider berhasil diupdate!');
+    }
+
+    public function slider_destroy($id)
+    {
+        $slider = $this->slider->where('id',$id)->select('id','nama_file')->first();
+        Storage::delete('slider/'.$slider->nama_file);
+
+        $this->slider->destroy($id);
+
+        return redirect('/slider')->with('success', 'Slider berhasil dihapus!');
     }
 }

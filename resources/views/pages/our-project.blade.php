@@ -28,7 +28,7 @@
                                 <div class="kt-widget__label">
                                     <div class="kt-widget__media">
                                         <span class="kt-media kt-media--lg kt-media--circle"> 
-                                            <img src="{{ url('storage/project/'.$pr->img_design) }}" alt="image">
+                                            <img src="{{ url('storage/project/'.$pr->img_map) }}" alt="image">
                                         </span>
                                     </div>
                                     <div class="kt-widget__info kt-margin-t-5">
@@ -41,9 +41,6 @@
                                     </div>
                                 </div>
                                 <div class="kt-portlet__head-toolbar">
-                                    <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
-                                        <i class="flaticon-more-1"></i>
-                                    </a>
                                 </div>
                             </div>
         
@@ -120,5 +117,15 @@
                 <!--end:: Portlet-->
             </div>
         @endforeach
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="kt-pagination kt-pagination--success mt-3 mb-2">
+                <p class="kt-section__desc"></p>
+                <div class="kt-pagination__toolbar">
+                    {{ $project->links() }}
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

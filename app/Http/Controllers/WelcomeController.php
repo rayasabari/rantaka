@@ -9,6 +9,7 @@ use App\Models\ProjectModel;
 use App\Models\PendanaanModel;
 use App\Models\ImgTipeModel;
 use App\Models\TipeRumahModel;
+use App\Models\SliderModel;
 use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 use Auth;
@@ -21,7 +22,8 @@ class WelcomeController extends Controller
             $project,
             $pendanaan,
             $tipe_rumah,
-            $img_tipe;
+            $img_tipe,
+            $slider;
 
     public function __construct()
     {
@@ -32,6 +34,7 @@ class WelcomeController extends Controller
         $this->pendanaan        = New PendanaanModel;
         $this->tipe_rumah       = New TipeRumahModel;
         $this->img_tipe         = New ImgTipeModel;
+        $this->slider           = New SliderModel;
     }
     /**
      * Show the application dashboard.
@@ -40,28 +43,12 @@ class WelcomeController extends Controller
      */
     public function welcome()
     {
-        $page       =   'home';
-        $properti   =   $this->properti->where('id_project', 1)
-        ->with(array(
-            'status'    => function($query){
-                $query->select('id', 'text');
-            },
-            'nama_tipe' => function($query){
-                $query->select('id', 'text');
-            },
-            'booking'   => function($query){
-                $query->select('id','tgl_expired');
-            }
-        ))    
-        ->orderBy('id', 'ASC')
-        ->get();
-
-        $list_blok = $this->properti->distinct('blok')->select('blok')->orderBy('blok','ASC')->get();
+        $page       = 'home';
+        $slider     = $this->slider->where('visibility',1)->orderBy('urutan','ASC')->get();
 
         $data       =   [
             'page'          => $page,
-            'properti'      => $properti,
-            'list_blok'     => $list_blok
+            'slider'        => $slider
         ];
 
         return view('index')->with($data);
@@ -96,14 +83,15 @@ class WelcomeController extends Controller
     public function our_project_index()
     {
         $project    = $this->project
-        ->select('id','nama','deskripsi','lokasi','total_luas','thn_bangun','img_design','img_logo')
+        ->where('visibility',1)
+        ->select('id','nama','deskripsi','lokasi','total_luas','thn_bangun','img_map','img_logo')
         ->withCount('total','available','booked')
         ->with(array(
             'harga_terendah'    => function($query){
                 $query->select('id','id_project','harga')->orderBy('harga','ASC')->first();
             }
         ))
-        ->orderBy('id','ASC')->paginate(2);
+        ->orderBy('id','ASC')->paginate(4);
 
         $pendanaan  = $this->pendanaan->select('nama')->get();
         

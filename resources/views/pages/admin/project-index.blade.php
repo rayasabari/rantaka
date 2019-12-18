@@ -47,6 +47,7 @@
                                 <th class="text-center">Available</th>
                                 <th class="text-center">Booked</th>
                                 <th class="text-center">Sold</th>
+                                <th class="text-center">Visibility</th>
                                 <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
@@ -62,6 +63,13 @@
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="text-success kt-font-bolder">{{ $p->available_count + $p->waiting_count  }}</h5></td>
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="text-danger kt-font-bolder">{{ $p->booked_count }}</h5></td>
                                     <td class="text-center align-middle"><span style="font-size: 15px" class="kt-font-brand kt-font-bolder">{{ $p->deal_count }}</h5></td>
+                                    <td class="text-center align-middle">
+                                        @if($p->visibility == 1)
+                                            <i class="fa fa-eye kt-font-warning"></i>
+                                        @else
+                                            <i class="fa fa-eye-slash text-black-50"></i>
+                                        @endif
+                                    </td>
                                     <td class="text-center align-middle">
                                         <a href="{{ url('/project/edit/'.$p->id) }}" class="btn btn-label-primary btn-pill btn-sm">
                                             Edit

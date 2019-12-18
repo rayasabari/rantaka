@@ -42,12 +42,17 @@
 <div class="row">
     <div class="col-lg-12 p-slide">
         <div class="slidex shadow-lg">
-            <div class="pict">
-                <img src="{{ url('storage/slider/1_slider_1.jpg') }}" alt="" width="100%">
-            </div>
-            <div class="pict">
-                <img src="{{ url('storage/slider/1_slider_2.jpg') }}" alt="" width="100%">
-            </div>
+            @foreach($slider as $s)
+                <div class="pict">
+                    @if($s->url != null)
+                        <a href="{{ $s->url }}">
+                            <img src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
+                        </a>
+                    @else
+                        <img src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
+                    @endif
+                </div>
+            @endforeach
         </div>
     </div>
 </div>

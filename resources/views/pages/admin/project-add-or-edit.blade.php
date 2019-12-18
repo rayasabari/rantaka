@@ -4,6 +4,11 @@
 
 @section('head')
     <title>{{ ucwords($act) }} Project | Rantaka</title>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('a[data-rel^=lightcase]').lightcase();
+        });
+    </script>
 @endsection
 
 
@@ -140,7 +145,9 @@
                                                 <label class="custom-file-label" for="customFile">Pilih file</label>
                                                 @if($act == 'edit') 
                                                     <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
-                                                        <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_map }}');"></div>
+                                                        <a href="{{ url('storage/project/'.$project->img_map) }}" data-rel="lightcase" title="Site Plan">
+                                                            <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_map }}');"></div>
+                                                        </a>
                                                     </div>
                                                 @endif
                                                 @error('img_map')
@@ -157,7 +164,9 @@
                                                 <label class="custom-file-label" for="customFile">Pilih file</label>
                                                 @if($act == 'edit') 
                                                     <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
-                                                        <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_logo }}');"></div>
+                                                        <a href="{{ url('storage/project/'.$project->img_logo) }}" data-rel="lightcase" title="Logo Project">
+                                                            <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_logo }}');"></div>
+                                                        </a>
                                                     </div>
                                                 @endif
                                                 @error('img_logo')
@@ -171,7 +180,8 @@
                                         <div class="col-lg-9 col-xl-6">
                                             <span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success">
                                                 <label>
-                                                    <input type="checkbox" value="1" {{ $act == 'edit' ? $project->visibility == 1 ? 'checked' : '' : '' }} name="visibility">
+                                                    <input type="checkbox" id="visibility" value="1" {{ $act == 'edit' ? $project->visibility == 1 ? 'checked' : '' : '' }} name="visibility">
+                                                    <input type="hidden" id="visibilityhide" value="0" name="visibility">
                                                     <span></span>
                                                 </label>
                                             </span>
@@ -470,6 +480,19 @@
             $('#link_img').click(function(){
                 $('.kt-portlet__foot').hide();
             });
+
+            $('#visibility').click(function(){
+                $(this).val(this.checked ? 1 : 0);
+                if($(this).val() == 1){
+                    $('#visibilityhide').prop('disabled', true);
+                }else{
+                    $('#visibilityhide').prop('disabled', false);
+                }
+            })
+
+            if($('#visibility').prop('checked')){
+                $('#visibilityhide').prop('disabled', true);
+            }
         });
     </script>
 @endsection
