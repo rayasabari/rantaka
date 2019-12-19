@@ -18,10 +18,10 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'A',
                     'no_unit'       => $a,
-                    'tipe'          => '30',
+                    'id_tipe_rumah' => 1,
                     'jml_lantai'    => 1,
                     'luas_tanah'    => 60,
-                    'luas_bangunan' => 30,
+                    'luas_bangunan' => 36,
                     'id_status'     => 1,
                     'harga'         => 279000000
                 ]);
@@ -33,10 +33,10 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'B',
                     'no_unit'       => $b,
-                    'tipe'          => '30',
+                    'id_tipe_rumah' => 1,
                     'jml_lantai'    => 1,
                     'luas_tanah'    => 60,
-                    'luas_bangunan' => 30,
+                    'luas_bangunan' => 36,
                     'id_status'     => 1,
                     'harga'         => 279000000
                 ]);
@@ -48,12 +48,12 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'C',
                     'no_unit'       => $c,
-                    'tipe'          => '30',
-                    'jml_lantai'    => 1,
+                    'id_tipe_rumah' => 2,
+                    'jml_lantai'    => 2,
                     'luas_tanah'    => 60,
-                    'luas_bangunan' => 30,
+                    'luas_bangunan' => 60,
                     'id_status'     => 1,
-                    'harga'         => 279000000
+                    'harga'         => 385000000
                 ]);
                 $c++;
             }
@@ -63,10 +63,10 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'D',
                     'no_unit'       => $d,
-                    'tipe'          => '30',
+                    'id_tipe_rumah' => 1,
                     'jml_lantai'    => 1,
                     'luas_tanah'    => 60,
-                    'luas_bangunan' => 30,
+                    'luas_bangunan' => 36,
                     'id_status'     => 1,
                     'harga'         => 279000000
                 ]);
@@ -78,12 +78,12 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'E',
                     'no_unit'       => $e,
-                    'tipe'          => '30',
-                    'jml_lantai'    => 1,
+                    'id_tipe_rumah' => 2,
+                    'jml_lantai'    => 2,
                     'luas_tanah'    => 60,
-                    'luas_bangunan' => 30,
+                    'luas_bangunan' => 60,
                     'id_status'     => 1,
-                    'harga'         => 279000000
+                    'harga'         => 385000000
                 ]);
                 $e++;
             }
@@ -93,7 +93,7 @@ class PropertiSeeder extends Seeder
                     'id_project'    => 1,
                     'blok'          => 'F',
                     'no_unit'       => $f,
-                    'tipe'          => '60',
+                    'id_tipe_rumah' => 2,
                     'jml_lantai'    => 1,
                     'luas_tanah'    => 60,
                     'luas_bangunan' => 60,

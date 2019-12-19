@@ -18,10 +18,11 @@ class CreatePropertiTable extends Migration
             $table->integer('id_project');
             $table->string('blok', 2)->nullable();
             $table->string('no_unit', 5)->nullable();
-            $table->string('tipe', 20)->nullable();
+            $table->integer('id_tipe_rumah')->nullable();
             $table->integer('jml_lantai')->nullable();
-            $table->integer('luas_tanah')->nullable();
-            $table->integer('luas_bangunan')->nullable();
+            $table->double('luas_tanah')->nullable();
+            $table->double('luas_tanah_lebih')->nullable();
+            $table->double('luas_bangunan')->nullable();
             $table->double('harga')->nullable();
             $table->integer('id_status')->nullable();
             $table->integer('id_booking')->nullable();

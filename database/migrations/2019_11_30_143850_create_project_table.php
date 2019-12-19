@@ -44,6 +44,7 @@ class CreateProjectTable extends Migration
             $table->string('img_design',50)->nullable();
             $table->string('img_layout',50)->nullable();
             $table->string('img_harga',50)->nullable();
+            $table->double('harga_kelebihan_tanah')->nullable();
             $table->double('booking_fee')->nullable();
             $table->integer('visibility')->nullable();
             $table->timestamps();

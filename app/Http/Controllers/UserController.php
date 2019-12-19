@@ -55,7 +55,7 @@ class UserController extends Controller
         $booking    = $this->booking->where('id_user', Auth::user()->id)
         ->with(array(
             'properti'  => function($query){
-                $query->select('id','id_project','blok','no_unit','tipe','harga')
+                $query->select('id','id_project','blok','no_unit','id_tipe_rumah','harga')
                 ->with(array(
                     'project'   => function($query){
                         $query->select('id','nama');
@@ -151,7 +151,7 @@ class UserController extends Controller
         $booking    = $this->booking->where('id_user', Auth::user()->id)->where('id', $id_booking)
         ->with(array(
             'properti'  => function($query){
-                $query->select('id','id_project','blok','no_unit','tipe','harga')
+                $query->select('id','id_project','blok','no_unit','id_tipe_rumah','harga')
                 ->with(array(
                     'project'   => function($query){
                         $query->select('id','nama');

@@ -15,7 +15,7 @@ class PropertiModel extends Model
 
     public function nama_tipe()
     {
-        return $this->hasOne('App\Models\TipeRumahModel','id','tipe');
+        return $this->hasOne('App\Models\TipeRumahModel','id','id_tipe_rumah');
     }
 
     public function status()

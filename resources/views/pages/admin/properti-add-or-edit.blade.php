@@ -4,8 +4,12 @@
 
 @section('head')
     <title>{{ ucwords($act) }} Properti | Rantaka</title>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('a[data-rel^=lightcase]').lightcase();
+        });
+    </script>
 @endsection
-
 
 @section('content_head')
     <h3 class="kt-subheader__title">Properti</h3>
@@ -32,8 +36,17 @@
                         <h3 class="kt-portlet__head-title">{{ ucwords($act) }} Properti</h3>
                     </div>
                     <div class="kt-portlet__head-toolbar">
-                        <div class="kt-portlet__head-wrapper">
-                        </div>
+                        @if($act == 'edit')
+                            <div class="kt-portlet__head-wrapper">
+                                <form method="post" action="{{ url('/properti/delete/'.$properti->id) }}" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <form class="kt-form kt-form--label-right" method="post" action="{{ $act == 'add' ? url('/properti/add') : url('/properti/edit/'.$properti->id) }}" enctype="multipart/form-data">
@@ -44,15 +57,16 @@
                                 <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Project</label>
                                     <div class="col-lg-9 col-xl-6">
-                                        <select class="form-control @error('project') is-invalid @enderror" name="project">
-                                            <option value="">- Pilih -</option>
+                                        <select id="project" class="form-control @error('project') is-invalid @enderror" name="project">
+                                            <option data-hrg="0" value="">- Pilih -</option>
                                             @foreach($project as $p)
-                                                <option value="{{ $p->id}}" @if($act == 'edit') {{ $properti->id_project == $p->id ? 'selected' : '' }} @else {{ old('project') == $p->id ? 'selected' : '' }} @endif>{{ $p->nama }}</option>s
+                                                <option data-hrg="{{ $p->harga_kelebihan_tanah }}" value="{{ $p->id}}" @if($act == 'edit') {{ $properti->id_project == $p->id ? 'selected' : '' }} @else {{ old('project') == $p->id ? 'selected' : '' }} @endif>{{ $p->nama }}</option>
                                             @endforeach
                                         </select>
                                         @error('project')
                                             <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror  
+                                        @enderror
+                                        <input hidden type="text" id="hkt" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -74,12 +88,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-xl-3 col-lg-3 col-form-label">Tipe</label>
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Tipe Rumah</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <select class="form-control @error('tipe') is-invalid @enderror" name="tipe">
                                             <option value="">- Pilih -</option>
                                             @foreach($tipe_rumah as $tr)
-                                                <option value="{{ $tr->id }}" @if($act == 'edit') {{ $properti->tipe == $tr->id ? 'selected' : '' }} @else {{ old('tipe') == $tr->id ? 'selected' : '' }} @endif>{{ $tr->text }}</option>
+                                                <option value="{{ $tr->id }}" @if($act == 'edit') {{ $properti->id_tipe_rumah == $tr->id ? 'selected' : '' }} @else {{ old('tipe') == $tr->id ? 'selected' : '' }} @endif>{{ $tr->text }}</option>
                                             @endforeach
                                         </select>
                                         @error('tipe')
@@ -100,7 +114,7 @@
                                     <label class="col-xl-3 col-lg-3 col-form-label">Luas Tanah</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <div class="input-group">
-                                            <input type="number" name="luas_tanah" class="form-control" value="{{ $act == 'edit' ? old('luas_tanah', number_format($properti->luas_tanah),0,',','.') : old('luas_tanah') }}" placeholder="" aria-describedby="basic-addon1">
+                                            <input type="number" step="any" name="luas_tanah" class="form-control" value="{{ $act == 'edit' ? old('luas_tanah', number_format($properti->luas_tanah,1,'.',',')) : old('luas_tanah') }}" placeholder="" aria-describedby="basic-addon1">
                                             <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
                                         </div>
                                         @error('luas_tanah')
@@ -109,10 +123,25 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Luas Tanah Lebih</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <div class="input-group">
+                                            <input id="ltl" type="number" step="any" name="luas_tanah_lebih" class="form-control" value="{{ $act == 'edit' ? old('luas_tanah_lebih', number_format($properti->luas_tanah_lebih,1,'.',',')) : old('luas_tanah_lebih') }}" placeholder="" aria-describedby="basic-addon1">
+                                            <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
+                                        </div>
+                                        <span class="form-text text-muted">
+                                            biaya kelebihan tanah per m<sup>2</sup> = <strong>Rp <span id="hkt_txt"></span></strong>
+                                        </span>
+                                        @error('luas_tanah_lebih')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-xl-3 col-lg-3 col-form-label">Luas Bangunan</label>
                                     <div class="col-lg-9 col-xl-6">
                                         <div class="input-group">
-                                            <input type="number" name="luas_bangunan" class="form-control" value="{{ $act == 'edit' ? old('luas_bangunan', number_format($properti->luas_bangunan),0,',','.') : old('luas_bangunan') }}" placeholder="" aria-describedby="basic-addon1">
+                                            <input type="number" step="any" name="luas_bangunan" class="form-control" value="{{ $act == 'edit' ? old('luas_bangunan', number_format($properti->luas_bangunan,1,'.',',')) : old('luas_bangunan') }}" placeholder="" aria-describedby="basic-addon1">
                                             <div class="input-group-prepend"><span class="input-group-text">m<sup>2</span></div>
                                         </div>
                                         @error('luas_bangunan')
@@ -125,9 +154,33 @@
                                     <div class="col-lg-9 col-xl-6">
                                         <div class="input-group">
                                             <div class="input-group-prepend"><span class="input-group-text">Rp</div>
-                                            <input type="text" name="harga" onkeyup="angka(this)" onblur="angka(this)" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('harga', number_format($properti->harga,0,',','.')) : old('harga') }}" placeholder="" aria-describedby="basic-addon1">
+                                            <input id="harga" type="text" name="harga" onkeyup="angka(this)" onblur="angka(this)" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('harga', number_format($properti->harga,0,',','.')) : old('harga') }}" placeholder="" aria-describedby="basic-addon1">
                                         </div>
                                         @error('harga')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Harga Luasan Lebih</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text">Rp</div>
+                                            <input id="hll" readonly type="text" name="harga_kelebihan_tanah" onkeyup="angka(this)" onblur="angka(this)" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('harga_kelebihan_tanah', number_format($properti->harga_kelebihan_tanah,0,',','.')) : old('harga_kelebihan_tanah') }}" placeholder="" aria-describedby="basic-addon1">
+                                        </div>
+                                        @error('harga_kelebihan_tanah')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror 
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">Total Harga</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text">Rp</div>
+                                            <input id="harga_total" readonly type="text" name="harga_total" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('harga_total', number_format($properti->harga_total,0,',','.')) : old('harga_total') }}" placeholder="" aria-describedby="basic-addon1">
+                                        </div>
+                                        @error('harga_total')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror 
                                     </div>
@@ -152,9 +205,11 @@
                                         <div class="custom-file">
                                             <input name="img_map" type="file" class="custom-file-input text-left @error('img_map') is-invalid @enderror" id="img_map">
                                             <label class="custom-file-label" for="customFile">Pilih file</label>
-                                            @if($act == 'edit') 
+                                            @if($act == 'edit' && $properti->img_map != null)
                                                 <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
-                                                    <div class="kt-avatar__holder" style="background-image: url('storage/properti/{{ $properti->img_map }}');"></div>
+                                                    <a href="{{ url('storage/properti/'.$properti->img_map) }}" data-rel="lightcase" title="Lokai Unit">
+                                                        <div class="kt-avatar__holder" style="background-image: url('storage/properti/{{ $properti->img_map }}');"></div>
+                                                    </a>
                                                 </div>
                                             @endif
                                             @error('img_map')
@@ -188,4 +243,50 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+    <script>
+        $(document).ready(function(){
+            get_hkt_m2();
+            calc_hkt();
+            calc_harga_total();
+
+            $('#project').change(function(){
+                get_hkt_m2();
+                calc_harga_total()
+                if($(this).val() == ''){
+                    $('#hll').val(0);
+                    $('#harga_total').val(0);
+                }
+            });
+            
+            $('#ltl, #harga').keyup(function(){
+                calc_hkt();
+                calc_harga_total();
+            });
+
+            function get_hkt_m2(){
+                var hrg = $('#project').find(':selected').data('hrg');
+                $('#hkt').val(hrg);
+                $('#hkt_txt').text(addCommas(hrg));
+            }
+
+            function calc_hkt(){
+                var ltl = $('#ltl').val();
+                var hkt = $('#hkt').val();
+                var hll = ltl * hkt;
+                $('#hll').val(addCommas(hll));
+            }
+
+            function calc_harga_total(){
+                var hrg     = $('#harga').val();
+                var hll     = $('#hll').val();
+                var a       = hrg.split('.').join('');
+                var b       = hll.split('.').join('');
+                var thrg    = parseInt(a) + parseInt(b);
+                $('#harga_total').val(addCommas(thrg));
+            }
+        });
+    </script>
 @endsection

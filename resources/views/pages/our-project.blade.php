@@ -43,7 +43,6 @@
                                 <div class="kt-portlet__head-toolbar">
                                 </div>
                             </div>
-        
                             <div class="kt-widget__body">
                                 <div class="kt-widget__stats">
                                     <div class="kt-widget__item">
@@ -54,7 +53,6 @@
                                             <h4 class="kt-font-brand">{{ $pr->total_count }}</h4>
                                         </div>
                                     </div>
-        
                                     <div class="kt-widget__item">
                                         <span class="kt-widget__date">
                                             Booked Unit
@@ -63,7 +61,6 @@
                                             <h4 class="text-danger">{{ $pr->booked_count }}</h4>
                                         </div>
                                     </div>
-        
                                     <div class="kt-widget__item flex-fill">
                                         <span class="kt-widget__subtitel">Available Unit</span>
                                         <div class="kt-widget__progress d-flex  align-items-center">
@@ -76,22 +73,18 @@
                                         </div>
                                     </div>
                                 </div>
-        
                                 <span class="kt-widget__text">
                                     {{ $pr->deskripsi }}                           
                                 </span>
-        
                                 <div class="kt-widget__content">
                                     <div class="kt-widget__details" style="width:40%">
                                         <span class="kt-widget__subtitle">Harga Mulai</span>
                                         <span class="kt-widget__value"><h3><span>Rp </span>{{ $pr->total_count == 0 ? '' : number_format($pr->harga_terendah[0]->harga,0,',','.') }}</span></h3>
                                     </div>
-        
                                     <div class="kt-widget__details" style="width:20%">
                                         <span class="kt-widget__subtitle">Uang Muka Mulai</span>
                                         <span class="kt-widget__value text-center"><h3>10 %</h3></span>
                                     </div>
-        
                                     <div class="kt-widget__details" style="width:20%">
                                         <span class="kt-widget__subtitle">Pendanaan</span>
                                         <div class="widget__value">
@@ -102,7 +95,6 @@
                                     </div>
                                 </div>
                             </div>
-        
                             <div class="kt-widget__footer">
                                 <div class="kt-widget__wrapper">
                                     <div class="kt-widget__section">

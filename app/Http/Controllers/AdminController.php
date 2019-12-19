@@ -73,7 +73,7 @@ class AdminController extends Controller
 
     public function properti_add()
     {
-        $project        = $this->project->select('id','nama')->orderBy('id', 'ASC')->get();
+        $project        = $this->project->select('id','nama','harga_kelebihan_tanah')->orderBy('id', 'ASC')->get();
         $tipe_rumah     = $this->tipe_rumah->select('id','text')->orderBy('id',"ASC")->get();
         $stt_properti   = $this->status_properti->select('id','text')->orderBy('id', 'ASC')->get();
         $data   = [
@@ -100,22 +100,25 @@ class AdminController extends Controller
 
         $project    = $this->project->where('id',$request->project)->select('nama')->first();
         
-        $properti                   = $this->properti;
-        $properti->id_project       = $request->project;
-        $properti->blok             = $request->blok;
-        $properti->no_unit          = $request->no_unit;
-        $properti->tipe             = $request->tipe;
-        $properti->jml_lantai       = $request->jml_lantai;
-        $properti->luas_tanah       = $request->luas_tanah;
-        $properti->luas_bangunan    = $request->luas_bangunan;
-        $properti->harga            = str_replace('.','',$request->harga);
-        $properti->id_status        = $request->status;
+        $properti                           = $this->properti;
+        $properti->id_project               = $request->project;
+        $properti->blok                     = $request->blok;
+        $properti->no_unit                  = $request->no_unit;
+        $properti->id_tipe_rumah            = $request->tipe;
+        $properti->jml_lantai               = $request->jml_lantai;
+        $properti->luas_tanah               = $request->luas_tanah;
+        $properti->luas_tanah_lebih         = $request->luas_tanah_lebih;
+        $properti->luas_bangunan            = $request->luas_bangunan;
+        $properti->harga                    = str_replace('.','',$request->harga);
+        $properti->harga_kelebihan_tanah    = str_replace('.','',$request->harga_kelebihan_tanah);
+        $properti->harga_total              = str_replace('.','',$request->harga_total);
+        $properti->id_status                = $request->status;
         if($request->hasFile('img_map')){
-            $filename = str_replace(' ','_', $project->nama ) .'_'. $request->blok .'_'. $request->no_unit .'.'. request()->img_map->getClientOriginalExtension();
+            $filename = time().'_'.str_replace(' ','_', $project->nama ) .'_'. $request->blok .'_'. $request->no_unit .'.'. request()->img_map->getClientOriginalExtension();
             $request->img_map->storeAs('properti', $filename);
-            $properti->img_map      = $filename;
+            $properti->img_map              = $filename;
         }
-        $properti->keterangan       = $request->keterangan;
+        $properti->keterangan               = $request->keterangan;
         $properti->save();
 
         $id = $this->properti->select('id')->orderBy('id', 'DESC')->first()->id;
@@ -124,8 +127,14 @@ class AdminController extends Controller
 
     public function properti_edit($id)
     {
-        $properti       = $this->properti->where('id', $id)->first();
-        $project        = $this->project->select('id','nama')->orderBy('id','ASC')->get();
+        $properti       = $this->properti->where('id', $id)
+                            ->with(array(
+                                'project'   => function($query){
+                                    $query->select('id','harga_kelebihan_tanah');
+                                }
+                            ))
+                            ->first();
+        $project        = $this->project->select('id','nama','harga_kelebihan_tanah')->orderBy('id','ASC')->get();
         $tipe_rumah     = $this->tipe_rumah->select('id','text')->orderBy('id',"ASC")->get();
         $stt_properti   = $this->status_properti->select('id','text')->orderBy('id','ASC')->get();
         $data       = [
@@ -161,7 +170,7 @@ class AdminController extends Controller
         
         if($request->hasFile('img_map')){
             Storage::delete('properti/'.$properti->img_map);
-            $filename = str_replace(' ','_', $properti->project->nama ) .'_'. $request->blok .'_'. $request->no_unit .'.'. request()->img_map->getClientOriginalExtension();
+            $filename = time().'_'.str_replace(' ','_', $properti->project->nama ) .'_'. $request->blok .'_'. $request->no_unit .'.'. request()->img_map->getClientOriginalExtension();
             $request->img_map->storeAs('properti', $filename);
             $this->properti->where('id',$id)
             ->update([
@@ -171,16 +180,19 @@ class AdminController extends Controller
 
         $this->properti->where('id',$id)
         ->update([
-            'id_project'    => $request->project,
-            'blok'          => $request->blok,
-            'no_unit'       => $request->no_unit,
-            'tipe'          => $request->tipe,
-            'jml_lantai'    => $request->jml_lantai,
-            'luas_tanah'    => $request->luas_tanah,
-            'luas_bangunan' => $request->luas_bangunan,
-            'harga'         => str_replace('.','',$request->harga),
-            'id_status'     => $request->status,
-            'keterangan'    => $request->keterangan
+            'id_project'            => $request->project,
+            'blok'                  => $request->blok,
+            'no_unit'               => $request->no_unit,
+            'id_tipe_rumah'         => $request->tipe,
+            'jml_lantai'            => $request->jml_lantai,
+            'luas_tanah'            => $request->luas_tanah,
+            'luas_tanah_lebih'      => $request->luas_tanah_lebih,
+            'luas_bangunan'         => $request->luas_bangunan,
+            'harga'                 => str_replace('.','',$request->harga),
+            'harga_kelebihan_tanah' => str_replace('.','',$request->harga_kelebihan_tanah),
+            'harga_total'           => str_replace('.','',$request->harga_total),
+            'id_status'             => $request->status,
+            'keterangan'            => $request->keterangan
         ]);
         
         return back()->with('status', 'Data berhasil diupdate!');
@@ -191,7 +203,7 @@ class AdminController extends Controller
         $properti = $this->properti->where('id',$id)->first();
         Storage::delete('properti/'.$properti->img_map);
         $this->properti->destroy($id);
-        return back()->with('status','Properti berhasil dihapus!'); 
+        return redirect('/properti')->with('status','Properti berhasil dihapus!'); 
     }
 
     public function booking_index()
@@ -199,7 +211,7 @@ class AdminController extends Controller
         $booking    = $this->booking
         ->with(array(
             'properti'  => function($query){
-                $query->select('id','id_project','blok','no_unit','tipe','harga')
+                $query->select('id','id_project','blok','no_unit','id_tipe_rumah','harga')
                 ->with(array(
                     'project'   => function($query){
                         $query->select('id','nama');
@@ -224,7 +236,6 @@ class AdminController extends Controller
             'booking'   => $booking
         ];
 
-
         return view('pages.admin.booking-index')->with($data);
     }
 
@@ -233,7 +244,7 @@ class AdminController extends Controller
         $booking    = $this->booking->where('id', $id)
         ->with(array(
             'properti'  => function($query){
-                $query->select('id','id_project','blok','no_unit','tipe', 'harga')
+                $query->select('id','id_project','blok','no_unit','id_tipe_rumah', 'harga')
                 ->with(array(
                     'project'   => function($query){
                         $query->select('id','nama');
@@ -387,17 +398,20 @@ class AdminController extends Controller
             'total_luas'    => 'required',
             'thn_bangun'    => 'required|max:4',
             'img_map'       => 'image|max:2048',
-            'img_logo'      => 'image|max:2048'
+            'img_logo'      => 'image|max:2048',
+            'img_harga'     => 'image|max:2048'
         ]);
 
-        $project                = $this->project;
-        $project->nama          = $request->nama;
-        $project->lokasi        = $request->lokasi;
-        $project->latitude      = $request->latitude;
-        $project->longitude     = $request->longitude;
-        $project->total_luas    = $request->total_luas;
-        $project->thn_bangun    = $request->thn_bangun;
-        $project->visibility    = $request->visibility;
+        $project                        = $this->project;
+        $project->nama                  = $request->nama;
+        $project->lokasi                = $request->lokasi;
+        $project->latitude              = $request->latitude;
+        $project->longitude             = $request->longitude;
+        $project->total_luas            = $request->total_luas;
+        $project->thn_bangun            = $request->thn_bangun;
+        $project->harga_kelebihan_tanah = str_replace('.','',$request->harga_kelebihan_tanah);
+        $project->booking_fee           = str_replace('.','',$request->booking_fee);
+        $project->visibility            = $request->visibility;
         if($request->hasFile('img_map')){
             $filename_map = time().'_'.str_replace(' ','_', $request->nama ) .'_map.'. request()->img_map->getClientOriginalExtension();
             $request->img_map->storeAs('project', $filename_map);
@@ -406,7 +420,12 @@ class AdminController extends Controller
         if($request->hasFile('img_logo')){
             $filename_logo = time().'_'.str_replace(' ','_', $request->nama ) .'_logo.'. request()->img_logo->getClientOriginalExtension();
             $request->img_logo->storeAs('project', $filename_logo);
-            $project->img_logo       = $filename_logo;
+            $project->img_logo      = $filename_logo;
+        }
+        if($request->hasFile('img_harga')){
+            $file_name_harga = time().'_'.str_replace(' ','_', $request->nama ) .'_harga.'. request()->img_harga->getClientOriginalExtension();
+            $request->img_harga->storeAs('project', $file_name_harga);
+            $project->img_harga     = $file_name_harga;
         }
         $project->save();
 
@@ -452,7 +471,8 @@ class AdminController extends Controller
             'total_luas'    => 'required',
             'thn_bangun'    => 'required|max:4',
             'img_map'       => 'image|max:2048',
-            'img_logo'      => 'image|max:2048'
+            'img_logo'      => 'image|max:2048',
+            'img_harga'     => 'image|max:2048'
         ]);
         
         if($request->hasFile('img_map')){
@@ -464,6 +484,7 @@ class AdminController extends Controller
                 'img_map'       => $filenma_map,
             ]);
         }
+
         if($request->hasFile('img_logo')){
             Storage::delete('project/'.$project->img_logo);
             $filename_logo = time() .'_'. str_replace(' ','_', $project->nama ) .'_logo.'. request()->img_logo->getClientOriginalExtension();
@@ -474,34 +495,67 @@ class AdminController extends Controller
             ]);
         }
 
+        if($request->hasFile('img_harga')){
+            Storage::delete('project/'.$project->img_harga);
+            $filename_harga = time() .'_'. str_replace(' ','_', $project->nama ) .'_harga.'. request()->img_harga->getClientOriginalExtension();
+            $request->img_harga->storeAs('project', $filename_harga);
+            $this->project->where('id',$id)
+            ->update([
+                'img_harga'       => $filename_harga,
+            ]);
+        }
+
         $this->project->where('id',$id)->update([
-            'nama'              => $request->nama,
-            'deskripsi'         => $request->deskripsi,
-            'lokasi'            => $request->lokasi,
-            'latitude'          => $request->latitude,
-            'longitude'         => $request->longitude,
-            'total_luas'        => $request->total_luas,
-            'thn_bangun'        => $request->thn_bangun,
-            'spek_pondasi'      => $request->spek_pondasi,
-            'spek_dinding'      => $request->spek_dinding,
-            'spek_struktur'     => $request->spek_struktur,
-            'spek_lantai'       => $request->spek_lantai,
-            'spek_kusen'        => $request->spek_kusen,
-            'spek_pintu'        => $request->spek_pintu,
-            'spek_jendela'      => $request->spek_jendela,
-            'spek_rangka_atap'  => $request->spek_rangka_atap,
-            'spek_penutup_atap' => $request->spek_penutup_atap,
-            'spek_plafond'      => $request->spek_plafond,
-            'spek_pintu_km'     => $request->spek_pintu_km,
-            'spek_kamar_mandi'  => $request->spek_kamar_mandi,
-            'spek_listrik'      => $request->spek_listrik,
-            'spek_air'          => $request->spek_air,
-            'spek_carport'      => $request->spek_carport,
-            'spek_cat'          => $request->spek_cat,
-            'visibility'        => $request->visibility
+            'nama'                  => $request->nama,
+            'deskripsi'             => $request->deskripsi,
+            'lokasi'                => $request->lokasi,
+            'latitude'              => $request->latitude,
+            'longitude'             => $request->longitude,
+            'total_luas'            => $request->total_luas,
+            'thn_bangun'            => $request->thn_bangun,
+            'spek_pondasi'          => $request->spek_pondasi,
+            'spek_dinding'          => $request->spek_dinding,
+            'spek_struktur'         => $request->spek_struktur,
+            'spek_lantai'           => $request->spek_lantai,
+            'spek_kusen'            => $request->spek_kusen,
+            'spek_pintu'            => $request->spek_pintu,
+            'spek_jendela'          => $request->spek_jendela,
+            'spek_rangka_atap'      => $request->spek_rangka_atap,
+            'spek_penutup_atap'     => $request->spek_penutup_atap,
+            'spek_plafond'          => $request->spek_plafond,
+            'spek_pintu_km'         => $request->spek_pintu_km,
+            'spek_kamar_mandi'      => $request->spek_kamar_mandi,
+            'spek_listrik'          => $request->spek_listrik,
+            'spek_air'              => $request->spek_air,
+            'spek_carport'          => $request->spek_carport,
+            'spek_cat'              => $request->spek_cat,
+            'harga_kelebihan_tanah' => str_replace('.','',$request->harga_kelebihan_tanah),
+            'booking_fee'           => str_replace('.','',$request->booking_fee),
+            'visibility'            => $request->visibility
         ]);
 
         return back()->with('success','Data project berhasil dirubah!');
+    }
+
+    public function project_destroy($id)
+    {
+        $project    = $this->project->where('id',$id)->select('id','img_map','img_logo','img_harga')->withCount('img_tipe')->first();
+        $img_tipe   = $this->img_tipe->where('id_project',$id)->select('id','id_project','file')->get();
+
+        if($project->img_tipe_count > 0){
+            foreach($img_tipe as $it){
+                Storage::delete('project/'.$it->file);
+            }
+        }
+
+        Storage::delete('project/'.$project->img_map);
+        Storage::delete('project/'.$project->img_logo);
+        Storage::delete('project/'.$project->img_harga);
+
+        $this->project->destroy($id);
+        $this->img_tipe->where('id_project', $id)->delete();
+        
+        return back()->with('success','Project berhasil dihapus!');
     }
 
     public function project_img_tipe_upload(Request $request, $id)
@@ -528,6 +582,8 @@ class AdminController extends Controller
 
     public function project_img_tipe_destroy($id)
     {
+        $img_tipe   = $this->img_tipe->where('id',$id)->select('id','file')->first();
+        Storage::delete('project/'.$img_tipe->file);
         $this->img_tipe->destroy($id);
 
         return back()->with('success','Foto berhasil dihapus!');

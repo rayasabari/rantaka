@@ -48,7 +48,7 @@
                                 <th class="text-center">Booked</th>
                                 <th class="text-center">Sold</th>
                                 <th class="text-center">Visibility</th>
-                                <th class="text-center" style="width: 8%"><i class="flaticon2-settings"></i></th>
+                                <th class="text-center" style="width: 10%"><i class="flaticon2-settings"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,6 +74,15 @@
                                         <a href="{{ url('/project/edit/'.$p->id) }}" class="btn btn-label-primary btn-pill btn-sm">
                                             Edit
                                         </a>
+                                        @if($p->total_count == 0)
+                                            <form method="POST" action="{{ url('/project/delete/'.$p->id) }}" enctype="multipart/form-data" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-label-danger btn-pill btn-sm">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

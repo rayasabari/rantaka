@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="row">
-                                <img src="{{ url('/images/gve_map.jpg') }}" width="650px" alt="">
+                                <img src="{{ url('/storage/properti/'.$properti->img_map) }}" width="650px" alt="">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
@@ -46,12 +46,20 @@
                                     </div>
                                     <div class="form-group">
                                         <span class="text-black-50 d-block mb-1">Luas Tanah</span>
-                                        <span><h6>{{ $properti->luas_tanah }} m<sup>2</sup></h6></span>
+                                        <span>
+                                            <h6>
+                                                {{ $properti->luas_tanah }}
+                                                @if($properti->luas_tanah_lebih != null || $properti->luas_tanah_lebih != 0)
+                                                    <span class="kt-font-success">(+{{ $properti->luas_tanah_lebih }})</span>
+                                                @endif
+                                                m<sup>2</sup>
+                                            </h6>
+                                        </span>
                                         <hr>
                                     </div>
                                     <div class="form-group">
                                         <span class="text-black-50 d-block mb-1">Harga</span>
-                                        <span><h6 class="kt-font-brand">Rp {{ number_format($properti->harga,0,',','.') }}</h6></span>
+                                        <span><h6 class="kt-font-brand">Rp {{ number_format($properti->harga_total,0,',','.') }}</h6></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6s">

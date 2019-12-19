@@ -138,12 +138,37 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Biaya Kelebihan Tanah</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text">Rp</div>
+                                                <input type="text" name="harga_kelebihan_tanah" onkeyup="angka(this)" onblur="angka(this)" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('harga_kelebihan_tanah', number_format($project->harga_kelebihan_tanah,0,',','.')) : old('harga_kelebihan_tanah') }}" placeholder="" aria-describedby="basic-addon1">
+                                                <div class="input-group-prepend"><span class="input-group-text">/m<sup>2</sup></div>
+                                            </div>
+                                            @error('harga_kelebihan_tanah')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Booking Fee</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend"><span class="input-group-text">Rp</div>
+                                                <input type="text" name="booking_fee" onkeyup="angka(this)" onblur="angka(this)" class="form-control font-weight-bold" value="{{ $act == 'edit' ? old('booking_fee', number_format($project->booking_fee,0,',','.')) : old('booking_fee') }}" placeholder="" aria-describedby="basic-addon1">
+                                            </div>
+                                            @error('booking_fee')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-xl-3 col-lg-3 col-form-label">Site Plan</label>
                                         <div class="col-lg-9 col-xl-6">
                                             <div class="custom-file">
                                                 <input name="img_map" type="file" class="custom-file-input text-left @error('img_map') is-invalid @enderror" id="img_map">
                                                 <label class="custom-file-label" for="customFile">Pilih file</label>
-                                                @if($act == 'edit') 
+                                                @if($act == 'edit' && $project->img_map != null) 
                                                     <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
                                                         <a href="{{ url('storage/project/'.$project->img_map) }}" data-rel="lightcase" title="Site Plan">
                                                             <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_map }}');"></div>
@@ -162,7 +187,7 @@
                                             <div class="custom-file">
                                                 <input name="img_logo" type="file" class="custom-file-input text-left @error('img_logo') is-invalid @enderror" id="img_logo">
                                                 <label class="custom-file-label" for="customFile">Pilih file</label>
-                                                @if($act == 'edit') 
+                                                @if($act == 'edit' && $project->img_logo != null ) 
                                                     <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
                                                         <a href="{{ url('storage/project/'.$project->img_logo) }}" data-rel="lightcase" title="Logo Project">
                                                             <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_logo }}');"></div>
@@ -170,6 +195,25 @@
                                                     </div>
                                                 @endif
                                                 @error('img_logo')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">Tabel Harga</label>
+                                        <div class="col-lg-9 col-xl-6">
+                                            <div class="custom-file">
+                                                <input name="img_harga" type="file" class="custom-file-input text-left @error('img_harga') is-invalid @enderror" id="img_harga">
+                                                <label class="custom-file-label" for="customFile">Pilih file</label>
+                                                @if($act == 'edit' && $project->img_harga != null ) 
+                                                    <div class="kt-avatar kt-avatar--outline kt-avatar--circle- mt-4" id="kt_user_edit_avatar">
+                                                        <a href="{{ url('storage/project/'.$project->img_harga) }}" data-rel="lightcase" title="Logo Project">
+                                                            <div class="kt-avatar__holder" style="background-image: url('storage/project/{{ $project->img_harga }}');"></div>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                                @error('img_harga')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -361,7 +405,7 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-xl-3">
                                         </div>
-                                        <div class="col-lg-9 col-xl-9">
+                                        <div class="col-lg-9 col-xl-9 ml-n3">
                                             <button type="submit" class="btn btn-success">Submit</button>&nbsp;
                                             <a href="{{ url('/project') }}" class="btn btn-secondary">Kembali</a>
                                         </div>

@@ -160,6 +160,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::post('project/add', 'AdminController@project_store');
     Route::get('project/edit/{id}', 'AdminController@project_edit');
     Route::post('project/edit/{id}', 'AdminController@project_update');
+    Route::delete('project/delete/{id}', 'AdminController@project_destroy');
     Route::post('project/upload/img_tipe/{id}', 'AdminController@project_img_tipe_upload');
     Route::delete('project/delete/img_tipe/{id}', 'AdminController@project_img_tipe_destroy');
 

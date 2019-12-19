@@ -58,10 +58,16 @@
                                     <td class="text-center align-middle">{{ $p->blok .' - '. $p->no_unit }}</td>
                                     <td class="text-center align-middle">Tipe {{ $p->nama_tipe->text }}</td>
                                     <td class="text-center align-middle">{{ $p->jml_lantai }} lantai</td>
-                                    <td class="text-center align-middle">{{ $p->luas_tanah }} m<sup>2</sup></td>
+                                    <td class="text-center align-middle">
+                                        {{ $p->luas_tanah }}
+                                        @if($p->luas_tanah_lebih != null || $p->luas_tanah_lebih != 0)
+                                            <span class="kt-font-success">(+{{ $p->luas_tanah_lebih }})</span>
+                                        @endif
+                                        m<sup>2</sup>
+                                    </td>
                                     <td class="text-center align-middle">{{ $p->luas_bangunan }} m<sup>2</sup></td>
                                     <td class="text-left align-middle">Rp</td>
-                                    <td class="text-right align-middle">{{ number_format($p->harga,0,',','.') }}</td>
+                                    <td class="text-right align-middle">{{ number_format($p->harga_total,0,',','.') }}</td>
                                     <td class="text-center align-middle">
                                         @if($p->id_status == 1)
                                             <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill"><a href="{{ url('/properti/edit/'.$p->id) }}" class="text-white">{{ $p->status->text }}</a></span>
@@ -75,13 +81,6 @@
                                         <a href="{{ url('/properti/edit/'.$p->id) }}" class="btn btn-label-info btn-pill btn-sm">
                                             Edit
                                         </a>
-                                        {{-- <form method="post" action="{{ url('/properti/delete/'.$p->id) }}" class="d-inline">
-                                            @method('delete')
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-icon btn-circle" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="Delete">
-                                                <i class="text-danger flaticon2-rubbish-bin-delete-button"></i>
-                                            </button>
-                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
