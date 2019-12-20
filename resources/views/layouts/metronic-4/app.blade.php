@@ -95,7 +95,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Layout Skins(used by all pages) -->
 
 		<!--end::Layout Skins -->
-		<link rel="shortcut icon" href="assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="assets/media/logos/rhr-icon.ico" />
 		<link href="slick/slick.css" rel="stylesheet" type="text/css" />
 		<link href="slick/slick-theme.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

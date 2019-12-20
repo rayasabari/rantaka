@@ -7,7 +7,7 @@ use App\Models\PropertiModel;
 use App\Models\StatusPropertiModel;
 use App\Models\BookingModel;
 use App\Models\ProjectModel;
-use App\Models\TipeRUmahModel;
+use App\Models\TipeRumahModel;
 use App\Models\StatusBookingModel;
 use App\Models\KonfirmasiModel;
 use App\Models\MarketingModel;
@@ -33,7 +33,7 @@ class AdminController extends Controller
     {
         $this->properti         = New PropertiModel;
         $this->project          = New ProjectModel;
-        $this->tipe_rumah       = New TipeRUmahModel;
+        $this->tipe_rumah       = New TipeRumahModel;
         $this->status_properti  = New StatusPropertiModel;
         $this->booking          = New BookingModel;
         $this->status_booking   = New StatusBookingModel;
@@ -315,7 +315,7 @@ class AdminController extends Controller
         return back()->with('status', "Booking berhasil diupdate!");
     }
 
-    public function konfrimasi_index()
+    public function konfirmasi_index()
     {
         $konfirmasi     = $this->konfirmasi
         ->with(array(
@@ -669,7 +669,8 @@ class AdminController extends Controller
 
         $filename           = time().'_'. str_replace(' ','_', request()->img_slider->getClientOriginalName());
         $original_filename  = str_replace(' ','_', request()->img_slider->getClientOriginalName());
-        $request->img_slider->storeAs('slider', $filename);
+        // $request->img_slider->storeAs('slider', $filename);
+        Storage::disk('local')->putFileAs('slider',$request->img_slider, $filename);
 
         $slider                     = $this->slider;
         $slider->nama_file          = $filename;

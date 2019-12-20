@@ -152,7 +152,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('booking/edit/{id}', 'AdminController@booking_edit');
     Route::post('booking/edit/{id}', 'AdminController@booking_update');
     
-    Route::get('konfirmasi', 'AdminController@konfrimasi_index');
+    Route::get('konfirmasi', 'AdminController@konfirmasi_index');
     Route::post('konfirmasi/approve/{id}', 'AdminController@konfirmasi_update');
 
     Route::get('project', 'AdminController@project_index');

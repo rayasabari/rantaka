@@ -19,15 +19,15 @@
                     <li class="kt-menu__item {{ $page ?? '' == 'home' ? 'kt-menu__item--open' : ''}}">
                         <a href="{{ url('/') }}" class="kt-menu__link"><span class="kt-menu__link-text">Home</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     </li>
-                    <li class="kt-menu__item">
+                    <li class="kt-menu__item {{ Request::segment(1) == 'our-project' ? 'kt-menu__item--open' : '' }}">
                         <a href="{{ url('/our-project') }}" class="kt-menu__link"><span class="kt-menu__link-text">Project</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     </li>
-                    <li class="kt-menu__item">
+                    {{-- <li class="kt-menu__item {{ Request::segment(1) == 'about-us' ? 'kt-menu__item--open' : '' }}">
                         <a href="{{ url('/about-us') }}" class="kt-menu__link"><span class="kt-menu__link-text">About Us</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
                     </li>
-                    <li class="kt-menu__item">  
+                    <li class="kt-menu__item {{ Request::segment(1) == 'contact-us' ? 'kt-menu__item--open' : '' }}">  
                         <a href="{{ url('/contact-us') }}" class="kt-menu__link"><span class="kt-menu__link-text">Contact Us</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -103,7 +103,10 @@
                         <!--end: Navigation -->
                     </div>
                 @elseif(Auth::guest())
-                    <span class="kt-header__topbar-username"><a href="/login" class="kt-font-light" >Login</a></span>
+                    {{-- <span class="kt-header__topbar-username"><a href="/login" class="kt-font-light" >Login</a></span> --}}
+                    <div class="kt-header__topbar-wrapper" data-offset="10px,0px">
+                        <span class="kt-header__topbar-welcome"><a href="{{ url('/login') }}" class="btn btn-success btn-elevate btn-pill btn-sm" >Login</a></span>
+                    </div>
                 @endif
             </div>
 

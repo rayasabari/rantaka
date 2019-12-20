@@ -61,7 +61,7 @@
             <div class="kt-portlet">
                 <div class="kt-portlet__body">
                     <div class="row kt-margin-b-40 kt-margin-t-20">
-                        <img src="{{ url('storage/project/'.$project->img_logo) }}" alt="" width="400" class="mx-auto d-block img-fluid">
+                        <img src="{{ url('storage/project/'.$project->img_logo) }}" alt="" class="mx-auto d-block img-fluid">
                     </div>
                     <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-success" role="tablist">
                         <li class="nav-item">
@@ -327,7 +327,7 @@
                                     <tbody>
                                         @foreach($properti->where('blok', $lb->blok) as $key => $p)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td></td>
+                                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                                 <td class="text-center align-middle">{{ $p->blok }}</td>
                                                 <td class="text-center align-middle">{{ $p->no_unit }}</td>
                                                 <td class="text-center align-middle">Tipe {{ $p->nama_tipe->text }}</td>
