@@ -65,8 +65,8 @@
                                     </td>
                                     <td class="text-left align-middle">{{ $s->judul }}</td>
                                     <td class="text-left align-middle">{{ $s->deskripsi }}</td>
-                                    <td class="text-center align-middle">{{ $s->url }}</td>
-                                    <td class="text-center align-middle">{{ $s->urutan }}</td>
+                                    <td class="text-left align-middle">{{ $s->url }}</td>
+                                    <td class="text-left align-middle">{{ $s->urutan }}</td>
                                     <td class="text-center align-middle">
                                         @if($s->visibility == 1)
                                             <i class="fa fa-eye kt-font-warning"></i>

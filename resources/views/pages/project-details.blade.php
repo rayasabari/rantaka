@@ -398,23 +398,46 @@
                         <div class="modal fade" id="kt_modal_6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="display: none;">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
-                                    {{-- <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Booking</h5>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Hubungi!</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         </button>
-                                    </div> --}}
-                                    <div class="modal-body text-center text-body">
-                                        <h3 class="kt-font-boldest mt-4 mb-4">Hubungi!</h3> 
-                                        <h4>
-                                            <i class="fa fa-phone-alt mr-2 text-success"></i> 021 3001 6002
-                                        </h4>
-                                        <h6>atau</h6>
-                                        <h4>
-                                            <i class="fa fa-mobile-alt mr-2 text-success"></i> 0822 1089 8969
-                                        </h4>
-                                        <h4>
-                                            <i class="fa fa-mobile-alt mr-2 text-success"></i> 0822 1089 8977
-                                        </h4>
+                                    </div>
+                                    <div class="modal-body text-body text-center">
+                                        {{-- <h3 class="kt-font-boldest mt-4 mb-4">Hubungi!</h3>  --}}
+
+                                        <div class="mb-4">
+                                            <h6 class="text-black-50 kt-font-bold">Telepon</h6>
+                                            <h3>
+                                                <i class="fa fa-phone-square-alt mr-3 text-success"></i>021 3001 6002
+                                            </h3>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h6 class="text-black-50 kt-font-bold">Whatsapp</h6>
+                                            <h3>
+                                                <i class="fab fa-whatsapp mr-2 text-success"></i>
+                                                <a href="https://wa.me/08119518969" target="_blank" class="text-body">
+                                                    0811 951 8969
+                                                </a>
+                                            </h3>
+                                            <h3>
+                                                <i class="fab fa-whatsapp mr-2 text-success"></i>
+                                                <a href="https://wa.me/08111518977" target="_blank" class="text-body">
+                                                    0811 151 8977
+                                                </a>
+                                            </h3>    
+                                        </div>
+
+                                        <div>
+                                            <h6 class="text-black-50 kt-font-bold">Email</h6>
+                                            <h4>
+                                                <i class="fa fa-envelope text-success" style="margin-right: 9px"></i>
+                                                <a href="mailto:secretariat@rantaka.id" class="text-body">
+                                                    secretariat@rantaka.id
+                                                </a>
+                                            </h4>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-success" data-dismiss="modal">Kembali</button>

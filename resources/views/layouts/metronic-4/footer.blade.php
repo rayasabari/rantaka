@@ -18,19 +18,28 @@
                     <div class="kt-footer__section">
                         <h3 class="kt-footer__title">Contact Us</h3>
                         <div class="kt-footer__content">
-                            <h4>
-                                <i class="fa fa-phone-alt mr-2"></i>021 3001 6002
+                            <h4 class="text-success">
+                                <i class="fa fa-phone-square-alt mr-3"></i>021 3001 6002
                             </h4>
                             <h4>
-                                <i class="fa fa-mobile-alt mr-3"></i>0822 1089 8969
+                                <a href="https://wa.me/08119518969" target="_blank" class="text-success">
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    0811 951 8969
+                                </a>
                             </h4>
                             </h4>
                             <h4>
-                                <i class="fa fa-mobile-alt mr-3"></i>0822 1089 8977
+                                <a href="https://wa.me/08111518977" target="_blank" class="text-success">
+                                    <i class="fab fa-whatsapp mr-2"></i>
+                                    0811 151 8977
+                                </a>
                             </h4>
-                            <h6>
-                                <i class="fa fa-envelope mr-3"></i>secretariat@rantaka.id
-                            </h6>
+                            <h5>
+                                <a href="mailto:secretariat@rantaka.id" class="text-success">
+                                    <i class="fa fa-envelope" style="margin-right: 9px"></i>
+                                    secretariat@rantaka.id
+                                </a>
+                            </h5>
                         </div>
                     </div>
                 </div>
