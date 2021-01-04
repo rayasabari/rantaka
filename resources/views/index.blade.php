@@ -39,7 +39,7 @@
 @endsection
 
 @section('content')
-<div class="row">
+<div class="row" style="display:none">
     <div class="col-lg-12 p-slide">
         <div class="slidex shadow-lg">
             @foreach($slider as $s)
@@ -56,7 +56,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" style="display:none">
     <div class="col-lg-12 text-center b-book">
         <a href="{{ url('our-project/1') }}" class="btn btn-success btn-lg kt-font-bold"><i class="fa fa-tag mr-1"></i> BOOK NOW!</a>
     </div>
@@ -73,6 +73,7 @@
                 autoplaySpeed: 3000,
                 fade: true
             });
+            $('.row').fadeIn(5000);
         });
     </script>
 @endsection
