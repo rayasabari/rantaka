@@ -74,7 +74,15 @@
                                         @elseif($p->id_status == 2)
                                             <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill"><a href="{{ url('/properti/edit/'.$p->id) }}" class="text-white">{{ $p->status->text }}</a></span>
                                         @else  
-                                            <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" data-original-title="{{ $p->booking->nama .' ('. $p->booking->no_hp . ')' }}"><a href="{{ url('/properti/edit/'.$p->id) }}" class="text-white" >{{ $p->status->text }}</a></span>
+                                            @php 
+                                                $nama = $p->booking != null ? $p->booking->nama : 'Manual';
+                                                $no_hp = $p->booking != null ? $p->booking->no_hp : 'Superadmin';
+                                            @endphp
+                                            <span 
+                                                class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill" data-skin="dark" data-toggle="kt-tooltip" data-placement="top" title="" 
+                                                data-original-title="{{ $nama .' ('. $no_hp . ')' }}">
+                                                <a href="{{ url('/properti/edit/'.$p->id) }}" class="text-white" >{{ $p->status->text }}</a>
+                                            </span>
                                         @endif
                                     </td>
                                     <td class="text-center align-middle">
