@@ -3,7 +3,7 @@
 
         <!-- begin:: Brand -->
         <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
-            <a class="kt-header__brand-logo" href="?page=index">
+            <a class="kt-header__brand-logo" href="/">
                 <img alt="Logo" src="assets/media/logos/rantaka-text-lg.webp" height="35" class="kt-header__brand-logo-default" />
                 <img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.webp" height="25" class="kt-header__brand-logo-sticky" />
             </a>

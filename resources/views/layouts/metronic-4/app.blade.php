@@ -116,7 +116,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- begin:: Header Mobile -->
 		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 			<div class="kt-header-mobile__logo">
-				<a href="index.html">
+				<a href="/">
 					<img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.webp" height="25" />
 				</a>
 			</div>
@@ -221,14 +221,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/bootstrap-maxlength/src/bootstrap-maxlength.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/plugins/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>
+		{{-- <script src="assets/plugins/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script> --}}
 		<script src="assets/plugins/general/bootstrap-switch/dist/js/bootstrap-switch.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/js/global/integration/plugins/bootstrap-switch.init.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/select2/dist/js/select2.full.js" type="text/javascript"></script>
+		{{-- <script src="assets/plugins/general/select2/dist/js/select2.full.js" type="text/javascript"></script> --}}
 		<script src="assets/plugins/general/ion-rangeslider/js/ion.rangeSlider.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/typeahead.js/dist/typeahead.bundle.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/handlebars/dist/handlebars.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>
+		{{-- <script src="assets/plugins/general/handlebars/dist/handlebars.js" type="text/javascript"></script> --}}
 		<script src="assets/plugins/general/inputmask/dist/inputmask/inputmask.date.extensions.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/inputmask/dist/inputmask/inputmask.numeric.extensions.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/nouislider/distribute/nouislider.js" type="text/javascript"></script>
@@ -237,10 +236,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/general/clipboard/dist/clipboard.min.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/dropzone/dist/dropzone.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/js/global/integration/plugins/dropzone.init.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/quill/dist/quill.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/@yaireo/tagify/dist/tagify.polyfills.min.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/@yaireo/tagify/dist/tagify.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/summernote/dist/summernote.js" type="text/javascript"></script>
+		{{-- <script src="assets/plugins/general/summernote/dist/summernote.js" type="text/javascript"></script> --}}
 		<script src="assets/plugins/general/markdown/lib/markdown.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/js/global/integration/plugins/bootstrap-markdown.init.js" type="text/javascript"></script>
@@ -251,9 +249,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/general/js/global/integration/plugins/jquery-validation.init.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/toastr/build/toastr.min.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/dual-listbox/dist/dual-listbox.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/raphael/raphael.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/morris.js/morris.js" type="text/javascript"></script>
-		<script src="assets/plugins/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/plugins/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/plugins/jquery-idletimer/idle-timer.min.js" type="text/javascript"></script>
 		<script src="assets/plugins/general/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>
@@ -267,56 +263,26 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script src="assets/plugins/general/dompurify/dist/purify.js" type="text/javascript"></script>
 
 		<!--end:: Vendor Plugins -->
-		<script src="assets/js/scripts.bundle.js" type="text/javascript"></script>
 
 		<!--begin:: Vendor Plugins for custom pages -->
-		<script src="assets/plugins/custom/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/@fullcalendar/core/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/@fullcalendar/daygrid/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/@fullcalendar/google-calendar/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/@fullcalendar/interaction/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/@fullcalendar/list/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/@fullcalendar/timegrid/main.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/gmaps/gmaps.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/flot/dist/es5/jquery.flot.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.resize.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.categories.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.pie.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.stack.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.crosshair.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/flot/source/jquery.flot.axislabels.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net/js/jquery.dataTables.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-bs4/js/dataTables.bootstrap4.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/js/global/integration/plugins/datatables.init.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-autofill/js/dataTables.autoFill.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-autofill-bs4/js/autoFill.bootstrap4.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/jszip/dist/jszip.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/pdfmake/build/pdfmake.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/pdfmake/build/vfs_fonts.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons/js/dataTables.buttons.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons/js/buttons.colVis.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons/js/buttons.flash.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons/js/buttons.html5.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-buttons/js/buttons.print.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-colreorder/js/dataTables.colReorder.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-fixedcolumns/js/dataTables.fixedColumns.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-keytable/js/dataTables.keyTable.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-responsive/js/dataTables.responsive.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-rowgroup/js/dataTables.rowGroup.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-rowreorder/js/dataTables.rowReorder.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-scroller/js/dataTables.scroller.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/datatables.net-select/js/dataTables.select.min.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/jstree/dist/jstree.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/jquery.vmap.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/maps/jquery.vmap.world.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/maps/jquery.vmap.russia.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/maps/jquery.vmap.usa.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/maps/jquery.vmap.germany.js" type="text/javascript"></script>
 		<script src="assets/plugins/custom/jqvmap/dist/maps/jquery.vmap.europe.js" type="text/javascript"></script>
-		<script src="assets/plugins/custom/uppy/dist/uppy.min.js" type="text/javascript"></script>
 
 		<!--end:: Vendor Plugins for custom pages -->
 
@@ -328,7 +294,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Page Vendors -->
 		
 		<!--begin::Page Scripts(used by this page) -->
-		<script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
+		{{-- <script src="assets/js/pages/dashboard.js" type="text/javascript"></script> --}}
 		
 		<!--end::Page Scripts -->
 		<script>

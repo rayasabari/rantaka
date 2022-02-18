@@ -73,7 +73,7 @@
                 autoplaySpeed: 3000,
                 fade: true
             });
-            $('.row').fadeIn(400);
+            $('.row').fadeIn(500);
         });
     </script>
 @endsection
