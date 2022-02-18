@@ -237,7 +237,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab_angsuran" role="tabpanel">
-                            <img class="img-thumbnail" src="{{ url('storage/project/'.$project->img_harga) }}" width="100%" alt="">
+                            <img loading="lazy" class="img-thumbnail" src="{{ url('storage/project/'.$project->img_harga) }}" width="100%" alt="">
                         </div>
                         <div class="tab-pane fade" id="tab_lokasi" role="tabpanel">
                             <div class="row">

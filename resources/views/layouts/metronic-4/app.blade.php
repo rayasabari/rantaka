@@ -107,7 +107,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- end::Head -->
 
 	<!-- begin::Body -->
-	<body style="background-image: url(assets/media/demos/demo4/header-4.jpg); background-position: center top; background-size: 100% 350px;" class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+	<body style="background-image: url(assets/media/demos/demo4/header-4.webp); background-position: center top; background-size: 100% 350px;" class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
 
 		<!-- begin::Page loader -->
 		<!-- end::Page Loader -->
@@ -117,7 +117,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 			<div class="kt-header-mobile__logo">
 				<a href="index.html">
-					<img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.png" height="25" />
+					<img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.webp" height="25" />
 				</a>
 			</div>
 			<div class="kt-header-mobile__toolbar">

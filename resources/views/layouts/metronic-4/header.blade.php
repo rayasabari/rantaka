@@ -4,8 +4,8 @@
         <!-- begin:: Brand -->
         <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
             <a class="kt-header__brand-logo" href="?page=index">
-                <img alt="Logo" src="assets/media/logos/rantaka-text-lg.png" height="35" class="kt-header__brand-logo-default" />
-                <img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.png" height="25" class="kt-header__brand-logo-sticky" />
+                <img alt="Logo" src="assets/media/logos/rantaka-text-lg.webp" height="35" class="kt-header__brand-logo-default" />
+                <img alt="Logo" src="assets/media/logos/rantaka-text-black-lg.webp" height="25" class="kt-header__brand-logo-sticky" />
             </a>
         </div>
 
@@ -43,7 +43,7 @@
                         <span class="kt-header__topbar-welcome">Hi,</span>
                         <span class="kt-header__topbar-username">{{ Auth::user()->first_name }}</span>
                         <span class="kt-header__topbar-icon"><b>{{ substr(Auth::user()->first_name,0,1) }}</b></span>
-                        <img alt="Pic" src="assets/media/users/300_21.jpg" class="kt-hidden" />
+                        {{-- <img alt="Pic" src="assets/media/users/300_21.jpg" class="kt-hidden" /> --}}
                     </div>
                     <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
 

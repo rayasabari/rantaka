@@ -1,4 +1,4 @@
-<div class="kt-footer  kt-footer--extended  kt-grid__item" id="kt_footer" style="background-image: url('assets/media/demos/demo4/footer-2.jpg');">
+<div class="kt-footer  kt-footer--extended  kt-grid__item" id="kt_footer" style="background-image: url('assets/media/demos/demo4/footer-2.webp');">
     <div class="kt-footer__top">
         <div class="kt-container ">
             <div class="row">
@@ -46,7 +46,7 @@
                 <div class="col-lg-4">
                     <div class="kt-footer__section">
                         <div class="kt-footer__content">
-                            <img class="kt-margin-t-30 kt-margin-l-60" src="{{ url('/assets/media/logos/rantaka-lg.png') }}" alt="Rantaka Logo" height="100">
+                            <img class="kt-margin-t-30 kt-margin-l-60" src="{{ url('/assets/media/logos/rantaka-lg.webp') }}" alt="Rantaka Logo" height="100">
                         </div>
                     </div>
                 </div>

@@ -46,10 +46,10 @@
                 <div class="pict">
                     @if($s->url != null)
                         <a href="{{ $s->url }}">
-                            <img src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
+                            <img loading="lazy" src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
                         </a>
                     @else
-                        <img src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
+                        <img loading="lazy" src="{{ url('storage/slider/'.$s->nama_file) }}" alt="" width="100%" style="max-height: 630px">
                     @endif
                 </div>
             @endforeach
@@ -73,7 +73,7 @@
                 autoplaySpeed: 3000,
                 fade: true
             });
-            $('.row').fadeIn(5000);
+            $('.row').fadeIn(400);
         });
     </script>
 @endsection
